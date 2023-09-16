@@ -5,18 +5,19 @@
  */
 package view;
 
-import bean.Cliente;
-import bean.Funcionario;
+import bean.ClienteMr;
+import bean.FunionarioMr;
 import dao.ClienteDAO;
 import dao.FuncionarioDAO;
 import java.util.List;
+import view.controle.VendasControle;
 
 /**
  *
  * @author u04127224290
  */
 public class JDLgVendas extends javax.swing.JDialog {
-
+  VendasControle vendasControle;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -26,18 +27,11 @@ public class JDLgVendas extends javax.swing.JDialog {
         setTitle("Fornecedores");
         setLocationRelativeTo(null);
         desabilitar();
-        ClienteDAO clienteDAO = new ClienteDAO() ;
-        List lista = clienteDAO.listAll();
-        for (int i = 0; i < lista.size(); i++) {
-           jCboClientes.addItem((Cliente) lista.get(i)); 
-            
-        }
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO() ;
-        List lista1 = funcionarioDAO.listAll();
-        for (int j = 0; j < lista1.size(); j++) {
-           jCboVendedor.addItem((Funcionario) lista1.get(j)); 
-            
-        }
+           vendasControle = new  VendasControle();
+     
+      
+        jTable1.setModel(vendasControle);
+       
     }
     
     public void limparCampos() {
@@ -90,9 +84,9 @@ public class JDLgVendas extends javax.swing.JDialog {
         JTxtNunvenda = new javax.swing.JTextField();
         jFmtData = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jCboClientes = new javax.swing.JComboBox<Cliente>();
+        jCboClientes = new javax.swing.JComboBox<ClienteMr>();
         jLabel3 = new javax.swing.JLabel();
-        jCboVendedor = new javax.swing.JComboBox<Funcionario>();
+        jCboVendedor = new javax.swing.JComboBox<FunionarioMr>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         JTxttotal = new javax.swing.JTextField();
@@ -482,6 +476,70 @@ public class JDLgVendas extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -510,8 +568,8 @@ public class JDLgVendas extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnIncluir1;
     private javax.swing.JButton jBtnPesquisar;
-    private javax.swing.JComboBox<Cliente> jCboClientes;
-    private javax.swing.JComboBox<Funcionario> jCboVendedor;
+    private javax.swing.JComboBox<ClienteMr> jCboClientes;
+    private javax.swing.JComboBox<FunionarioMr> jCboVendedor;
     private javax.swing.JFormattedTextField jFmtData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

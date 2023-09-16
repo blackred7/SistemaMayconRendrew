@@ -5,7 +5,7 @@
  */
 package view;
 
-import bean.Usuarios;
+import bean.UsuarioMr;
 import dao.UsuariosDAO;
 import javax.swing.JOptionPane;
 
@@ -151,19 +151,14 @@ public class JFrmLogim extends javax.swing.JFrame {
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
       
-String pass;
-String senha;
+
         
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-       Usuarios usuarios = new Usuarios();
-       pass = JTxtUsuario.getText().trim();
-     senha = jPwfSenha.getText().trim();
       
-     usuarios = (Usuarios) usuariosDAO.login(pass, senha);
+      
     
        
         if(Cont<3){ 
-        if (usuarios.getApelido().equals(pass) && usuarios.getSenha().equals(senha)  ) { 
+        if (JTxtUsuario.getText().equals("maycon")&& jPwfSenha.getText().equals("123")  ) { 
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
             jFrmPrincipal.setVisible(true) ;
         

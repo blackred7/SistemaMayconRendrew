@@ -1,7 +1,7 @@
 package view.pesquisar;
 
 import view.controle.ClienteControle;
-import bean.Cliente;
+import bean.ClienteMr;
 import dao.ClienteDAO;
 import java.util.List;
 import view.JDlgCliente;
@@ -27,10 +27,10 @@ public class JDLgClientes_pesquisar extends javax.swing.JDialog {
     public JDLgClientes_pesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
          clienteControle = new  ClienteControle();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        List lista = clienteDAO.listAll();
-        clienteControle.setList(lista);
+     
+      
         jTable1.setModel(clienteControle);
     }
 
@@ -113,8 +113,7 @@ public class JDLgClientes_pesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
        int rowsel = jTable1.getSelectedRow();
        
-       Cliente cliente = clienteControle.getbean(rowsel);
-       jDlgCliente.beanviaw(cliente);
+      
        
        
        
@@ -151,6 +150,8 @@ public class JDLgClientes_pesquisar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDLgClientes_pesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

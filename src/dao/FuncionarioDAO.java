@@ -5,203 +5,77 @@
  */
 package dao;
 
-import bean.Adm;
+
 import teste.testeJDBC;
-import bean.Funcionario;
-import dao.DAO_Abstract;
+import bean.FunionarioMr;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
 
 /**
  *
  * @author u03402615100
  */
 public class FuncionarioDAO extends DAO_Abstract{
+public  FuncionarioDAO(){
+
+
+
+}
 
     @Override
     public void insert(Object object) {
-        Funcionario funcionario = (Funcionario) object;
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges";
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "insert into funcionario values(?,?,?,?,?,?,?,?)";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, funcionario.getIdFuncinario());
-            pstm.setString(2, funcionario.getSexo());
-            pstm.setString(3, funcionario.getEmail());
-            pstm.setInt(4, funcionario.getNumero_tel());
-              pstm.setString(5, funcionario.getFoto());
-              pstm.setInt(6, funcionario.getFk_usuario());
-            pstm.setString(7, funcionario.getNome());  
-             pstm.setString(8, funcionario.getCpf()); 
-             
-              
-             
-            
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       session.beginTransaction();
+       session.save(object);
+       session.getTransaction().commit();
     }
 
     @Override
-   public void update(Object object) {
-       
-        Funcionario funcionario = (Funcionario) object;
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "update funcionario set sexo=?,email=?,numero_tel=?,foto=?,fk_usuario=?,nome=?,cpf=?"
-                    + "where id_funcionario=?";
-            pstm = cnt.prepareStatement(sql);
-             pstm.setInt(8, funcionario.getIdFuncinario());
-            pstm.setString(1, funcionario.getSexo());
-            pstm.setString(2, funcionario.getEmail());
-            pstm.setInt(3, funcionario.getNumero_tel());
-              pstm.setString(4, funcionario.getFoto());
-              pstm.setInt(5, funcionario.getFk_usuario());
-            pstm.setString(6, funcionario.getNome());  
-             pstm.setString(7, funcionario.getCpf());  
-            
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+    public void update(Object object) {
+      session.beginTransaction();
+       session.update(object);
+       session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-      
-        Funcionario funcionario = (Funcionario) object;
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "delete from funcionario where id_funcionario=?";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, funcionario.getIdFuncinario());
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+        session.beginTransaction();
+       session.delete(object);
+       session.getTransaction().commit();
     }
 
     @Override
-   public Object list(int id) {
-         Funcionario funcionario = new Funcionario();
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "select * from funcionario where id_funcionario=?";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, id);
-            
-            ResultSet rs = pstm.executeQuery();
-            if(rs.next()==true){
-            funcionario.setIdFuncinario(rs.getInt("id_funcionario"));
-            funcionario.setNome(rs.getString("nome"));
-            funcionario.setEmail(rs.getString("email"));
-            funcionario.setSexo(rs.getString("sexo"));
-            funcionario.setFoto(rs.getString("foto"));
-            funcionario.setNumero_tel(rs.getInt("numero_tel"));
-            funcionario.setFk_usuario(rs.getInt("fk_usuario"));
-            funcionario.setCpf(rs.getString("cpf"));
-           
-            
-            }
-            
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return funcionario;
-        
+    public Object list(int id) {
+       session.beginTransaction();
+       Criteria criteria = session.createCriteria(FunionarioMr.class);
+       criteria.add(Restrictions.eq("idUsuario_MR", id));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista.get(0);
     }
 
     @Override
-public List listAll() {
-        java.util.List lista = new ArrayList();
-        try {
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "select * from funcionario";
-            pstm = cnt.prepareStatement(sql);
-            ResultSet rs = pstm.executeQuery();
-            
-            while(rs.next() == true) {
-                Funcionario funcionario = new Funcionario();
-                funcionario.setIdFuncinario(rs.getInt("id_funcionario"));
-                funcionario.setNome(rs.getString("nome"));
-                funcionario.setEmail(rs.getString("email"));
-                funcionario.setSexo(rs.getString("sexo"));
-                funcionario.setFoto(rs.getString("foto"));
-                funcionario.setNumero_tel(rs.getInt("numero_tel"));
-                funcionario.setFk_usuario(rs.getInt("fk_usuario"));
-                funcionario.setCpf(rs.getString("cpf"));
-                lista.add(funcionario);
-            }
-    }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-    }    return  lista;
+    public List listAll() {
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(FunionarioMr.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+     
     }
+    
     public static void main(String[] args) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setIdFuncinario(3);
-        funcionario.setNome("Baraka");
-        funcionario.setCpf("4r");
-        funcionario.setEmail("aobfbao");
-        funcionario.setNumero_tel(7994-345);
-        funcionario.setSexo("M");
-        funcionario.setFoto("//foto.org");
-        funcionario.setFk_usuario(5);
-        
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-       funcionarioDAO.delete(funcionario);
-        System.out.println(funcionario);
+        UsuariosDAO usuariosDAO= new UsuariosDAO();
     }
 }
-    

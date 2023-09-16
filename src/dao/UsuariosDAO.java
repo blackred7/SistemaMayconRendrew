@@ -5,9 +5,9 @@
  */
 package dao;
 
-import bean.Cliente;
+
 import teste.testeJDBC;
-import bean.Usuarios;
+import bean.UsuarioMr;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 
 /**
@@ -31,211 +33,49 @@ public  UsuariosDAO(){
 
 
 }
+
     @Override
     public void insert(Object object) {
-        Usuarios usuarios = (Usuarios) object;
-       try{
-             String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "insert into usuario values(?,?,?,?,?,?,?,?)";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, usuarios.getIdusuario());
-            pstm.setString(2, usuarios.getNome());  
-             pstm.setString(3, usuarios.getApelido()); 
-             pstm.setString(4, usuarios.getCpf());
-             pstm.setInt(5, usuarios.getNivel()); 
-             pstm.setString(6, usuarios.getAtivo());      
-            pstm.setString(7, usuarios.getSenha()); 
-            pstm.setDate(8,  new  java.sql.Date(usuarios.getData_nasc().getTime()));
-            
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       session.beginTransaction();
+       session.save(object);
+       session.getTransaction().commit();
     }
 
     @Override
     public void update(Object object) {
-       
-        Usuarios usuarios = (Usuarios) object;
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "update usuario set nome=?,apelido=?,cpf=?,nivel=?,"
-                    + "ativo=?,senha=?,data_nasc=? where idusuario=?";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(8, usuarios.getIdusuario());
-            pstm.setString(1, usuarios.getNome());  
-             pstm.setString(2, usuarios.getApelido()); 
-             pstm.setString(3, usuarios.getCpf());
-             pstm.setInt(4, usuarios.getNivel()); 
-             pstm.setString(5, usuarios.getAtivo());      
-            pstm.setString(6, usuarios.getSenha()); 
-           pstm.setDate(7,  new  java.sql.Date(usuarios.getData_nasc().getTime()));
-            
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+      session.beginTransaction();
+       session.update(object);
+       session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-      
-        Usuarios usuarios = (Usuarios) object;
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "delete from usuario where idusuario=?";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, usuarios.getIdusuario());
-            
-            pstm.executeUpdate();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+        session.beginTransaction();
+       session.delete(object);
+       session.getTransaction().commit();
     }
 
     @Override
     public Object list(int id) {
-        Usuarios usuarios = new Usuarios();
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "select * from usuario where idusuario=?";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setInt(1, id);
-            
-            ResultSet rs = pstm.executeQuery();
-            if(rs.next()==true){
-            usuarios.setIdusuario(rs.getInt("idusuario"));
-            usuarios.setNome(rs.getString("nome"));
-            usuarios.setApelido(rs.getString("apelido"));
-            usuarios.setCpf(rs.getString("cpf"));
-            usuarios.setNivel(rs.getInt("nivel"));
-            usuarios.setAtivo(rs.getString("ativo"));
-            usuarios.setSenha(rs.getString("senha"));
-            usuarios.setData_nasc(rs.getDate("data_nasc"));
-            }
-            
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return usuarios;
-        
-    }
-    
-    public Object login(String pass, String senha ) {
-        Usuarios usuarios = new Usuarios();
-       try{
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges"; 
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "select * from usuario where apelido=? and senha=? ";
-            pstm = cnt.prepareStatement(sql);
-            pstm.setString(1, pass);
-            pstm.setString(2, senha);
-           
-            
-            ResultSet rs = pstm.executeQuery();
-            if(rs.next()==true){
-          
-            usuarios.setApelido(rs.getString("apelido"));
-           
-            usuarios.setSenha(rs.getString("senha"));
-           
-            }
-            
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return usuarios;
-        
+       session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+       criteria.add(Restrictions.eq("idUsuario_MR", id));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista.get(0);
     }
 
     @Override
     public List listAll() {
-       java.util.List lista = new ArrayList();
-        try {
-            String url, use, password;
-            url = "jdbc:mysql://10.7.0.51:33062/db_maycon_borges";
-            use = "maycon_borges";
-            password = "maycon_borges";
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection cnt;
-            cnt = DriverManager.getConnection(url, use, password);
-            PreparedStatement pstm;
-            String sql = "select * from usuario";
-            pstm = cnt.prepareStatement(sql);
-            ResultSet rs = pstm.executeQuery();
-
-            while (rs.next() == true) {
-                Usuarios usuarios = new Usuarios();
-                  usuarios.setIdusuario(rs.getInt("idusuario"));
-            usuarios.setNome(rs.getString("nome"));
-            usuarios.setApelido(rs.getString("apelido"));
-            usuarios.setCpf(rs.getString("cpf"));
-            usuarios.setNivel(rs.getInt("nivel"));
-            usuarios.setAtivo(rs.getString("ativo"));
-            usuarios.setSenha(rs.getString("senha"));
-            usuarios.setData_nasc(rs.getDate("data_nasc"));
-                lista.add(usuarios);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(testeJDBC.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return  lista;
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+     
     }
+    
     public static void main(String[] args) {
-        Usuarios usuarios = new Usuarios();
-        usuarios.setIdusuario(88);
-        usuarios.setNome("Bakarakas");
-        usuarios.setApelido("bks");
-        usuarios.setCpf("345");
-        usuarios.setNivel(2);
-        usuarios.setAtivo("s");
-        usuarios.setSenha("1qs453");
-        
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-       usuariosDAO.delete(usuarios);
-        System.out.println(usuarios);
+        UsuariosDAO usuariosDAO= new UsuariosDAO();
     }
 }
-    

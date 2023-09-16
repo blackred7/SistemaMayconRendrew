@@ -1,7 +1,7 @@
 package view.pesquisar;
 
 import view.controle.UsuarioControle;
-import bean.Usuarios;
+import bean.UsuarioMr;
 import dao.UsuariosDAO;
 import java.util.List;
 import view.JDlgUsuarios;
@@ -28,9 +28,7 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
          usuarioControle = new  UsuarioControle();
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-        List lista = usuariosDAO.listAll();
-        usuarioControle.setList(lista);
+       
         jTable1.setModel(usuarioControle);
     }
 
@@ -113,8 +111,7 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
        int rowsel = jTable1.getSelectedRow();
        
-       Usuarios usuarios = usuarioControle.getbean(rowsel);
-       jDlgUsuarios.beanviaw(usuarios);
+      
        
        
        
@@ -151,6 +148,7 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDLgUsuarios_pesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

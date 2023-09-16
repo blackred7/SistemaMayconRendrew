@@ -7,8 +7,8 @@ package view;
 
 
 import view.pesquisar.JDLgClientes_pesquisar;
-import bean.Cliente;
-import bean.Usuarios;
+import bean.ClienteMr;
+import bean.UsuarioMr;
 import dao.ClienteDAO;
 import dao.UsuariosDAO;
 import java.text.ParseException;
@@ -43,12 +43,9 @@ public class JDlgCliente extends javax.swing.JDialog {
         }
         jFmtData.setFormatterFactory(new DefaultFormatterFactory(maskdata));
    
-    UsuariosDAO usuariosDAO = new UsuariosDAO();
-        List lista = usuariosDAO.listAll();
-        for (int i = 0; i < lista.size(); i++) {
-           jCboFk.addItem((Usuarios) lista.get(i)); 
-            
-        }
+   
+      
+       
     
     }
     
@@ -121,80 +118,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         jBtnExcluir.setEnabled(true);
         jBtnPesquisar.setEnabled(true);
     }
-     public Cliente viawbean(){
-      //int\/
-        Cliente cliente = new Cliente();
-        int id = Integer.valueOf(jTxtCodigo.getText());
-        cliente.setId_cliente(id);
-        
-        
-         //string\/
-        cliente.setNome(jTxtNome.getText());
-        cliente.setEmail(JTxtEmail.getText());
-        cliente.setEnd(JTxtEndereco.getText());
-         cliente.setDescricao(JTxtDescricao.getText());
-        cliente.setPorte_pessoal(JTxtPortePessoal.getText());
-        cliente.setPreferencias(JTxtPreferencias.getText());
-        cliente.setRg(JTxtRG.getText());
-         cliente.setHistorico_compra(JTxtHistoticoCompras.getText());
-         cliente.setSexo(JTxtSexo.getText());
-         
-         //iindex\/
-        cliente.setIndentificacao(jCboIndentificacao.getSelectedIndex());
-        cliente.setFk_usuario(1);
-         //selected/boolean
-        if (jChbPremiun.isSelected()== true) {
-            cliente.setPremiun("S");
-        }else{cliente.setPremiun("N");}
-        if (jChbCriminal.isSelected()== true) {
-            cliente.setCriminal("S");
-        }else{cliente.setCriminal("N");}
-       
-         //data\/
-         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        jFmtData.getText();
-        try {
-          cliente.setData_cadastro(formato.parse(jFmtData.getText()));
-           } catch (ParseException ex) {
-        System.out.println("Erro:" + ex.getMessage());
-            }
-        
-        return cliente;
-    }
-    public Cliente beanviaw(Cliente cliente){
-         //int\/
-       jTxtCodigo.setText( String.valueOf(cliente.getId_cliente() ) );
-       
-        //string\/
-       jTxtNome.setText(cliente.getNome());
-        JTxtEmail.setText(cliente.getEmail());
-         JTxtEndereco.setText(cliente.getEnd());
-         JTxtEmail.setText(cliente.getEmail());
-        JTxtDescricao.setText(cliente.getDescricao());
-         JTxtPortePessoal.setText(cliente.getPorte_pessoal());
-         JTxtPreferencias.setText(cliente.getPreferencias());
-        JTxtRG.setText(cliente.getRg());
-         JTxtSexo.setText(cliente.getSexo());
-         JTxtHistoticoCompras.setText(cliente.getHistorico_compra());
-          //index\/
-       jCboIndentificacao.setSelectedIndex(cliente.getIndentificacao());
-       jCboFk.setSelectedIndex(cliente.getFk_usuario());
-       //selected/boolean
-       if (cliente.getPremiun().equals("S")) {
-            jChbPremiun.setSelected(true);
-       }else{jChbPremiun.setSelected(false);}
-       if (cliente.getCriminal().equals("S")) {
-            jChbCriminal.setSelected(true);
-       }else{jChbCriminal.setSelected(false);}
-        //data\/
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        
-        jFmtData.setText(formato.format(cliente.getData_cadastro()));
-        return cliente;
-      
-     
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -243,7 +167,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         JTxtHistoticoCompras = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
-        jCboFk = new javax.swing.JComboBox<Usuarios>();
+        jCboFk = new javax.swing.JComboBox<UsuarioMr>();
 
         jLabel4.setText("Apelido");
 
@@ -567,9 +491,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         int resp =  JOptionPane.showConfirmDialog(null,  "deseja excluir?", "Pergunta", JOptionPane.YES_NO_OPTION);
        if(resp == JOptionPane.YES_OPTION){
-      Cliente cliente = viawbean();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.delete(cliente);
+      
       }else{
            JOptionPane.showMessageDialog(null, "exclusão cancelada");
            desabilitar();
@@ -582,16 +504,12 @@ public class JDlgCliente extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
           if (incl ==true) {
-             Cliente cliente = viawbean();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.insert(cliente);
+       
         }else{ 
-             Cliente cliente = viawbean();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.update(cliente);}
+             
         
         
-        desabilitar();
+        desabilitar();}
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -700,6 +618,38 @@ public class JDlgCliente extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -731,7 +681,7 @@ public class JDlgCliente extends javax.swing.JDialog {
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
-    private javax.swing.JComboBox<Usuarios> jCboFk;
+    private javax.swing.JComboBox<UsuarioMr> jCboFk;
     private javax.swing.JComboBox<String> jCboIndentificacao;
     private javax.swing.JCheckBox jChbCriminal;
     private javax.swing.JCheckBox jChbPremiun;
