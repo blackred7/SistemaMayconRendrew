@@ -1,7 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dao;
 
-import bean.ClienteMr;
+
 import teste.testeJDBC;
+import bean.VendasAnimaisMr;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,8 +27,8 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u03402615100
  */
-public class ClienteDAO extends DAO_Abstract{
-public  ClienteDAO(){
+public class VendasAnimais extends DAO_Abstract{
+public  VendasAnimais(){
 
 
 
@@ -52,8 +58,8 @@ public  ClienteDAO(){
     @Override
     public Object list(int id) {
        session.beginTransaction();
-       Criteria criteria = session.createCriteria(ClienteMr.class);
-       criteria.add(Restrictions.eq("idCliente_MR", id));
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
+       criteria.add(Restrictions.eq("idUsuario_MR", id));
         List lista = criteria.list();
         session.getTransaction().commit();
     return lista.get(0);
@@ -62,10 +68,14 @@ public  ClienteDAO(){
     @Override
     public List listAll() {
         session.beginTransaction();
-       Criteria criteria = session.createCriteria(ClienteMr.class);
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
         List lista = criteria.list();
         session.getTransaction().commit();
     return lista;
      
+    }
+    
+    public static void main(String[] args) {
+        UsuariosDAO usuariosDAO= new UsuariosDAO();
     }
 }

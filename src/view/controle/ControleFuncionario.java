@@ -4,22 +4,20 @@
  * and open the template in the editor.
  */
 package view.controle;
-import bean.ClienteMr;
+import bean.FunionarioMr;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 /**
  *
  * @author u13766540670
  */
-public class ClienteControle extends AbstractTableModel {
-
-
+public class ControleFuncionario extends AbstractTableModel {
 
 
 
     @Override
     public int getRowCount() {
-        return 4;
+    return 4;
     }
 
     @Override
@@ -29,7 +27,7 @@ public class ClienteControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       
+        
       if (columnIndex == 0) {
              return null;
         }
@@ -57,7 +55,7 @@ public class ClienteControle extends AbstractTableModel {
              return "Email";
         }
         if (columnIndex == 3) {
-             return "Rg";
+             return "Telefone";
         }
        
     return null;

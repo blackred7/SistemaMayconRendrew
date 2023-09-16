@@ -7,7 +7,7 @@ package view;
 
 import view.pesquisar.JDLgUsuarios_pesquisar;
 import javax.swing.JOptionPane;
-import bean.Usuarios;
+import bean.UsuarioMr;
 import dao.UsuariosDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import view.tools.Util;
 /**
  *
  * @author u04127224290
@@ -34,7 +33,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         initComponents();
         setTitle("Usuarios");
         setLocationRelativeTo(null);
-        habilitar(false);
+        desabilitar();
         try {
             maskcpf = new MaskFormatter("###.###.###-##");
         } catch (ParseException ex) {
@@ -61,80 +60,45 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jChbAtivo.setSelected(false);
     }
     
-    public void habilitar (boolean valor) {
-        JTxtCodigo.setEnabled(valor);
-        JTxtNome.setEnabled(valor);
-        JTxtApelido.setEnabled(valor);
-        jTxtCpf.setEnabled(valor);
-        jFmtData.setEnabled(valor);
-        jPwfSenha.setEnabled(valor);
-        jChbAtivo.setEnabled(valor);
-        jCboNivel.setEnabled(valor);
+    public void habilitar () {
+        JTxtCodigo.setEnabled(true);
+        JTxtNome.setEnabled(true);
+        JTxtApelido.setEnabled(true);
+        jTxtCpf.setEnabled(true);
+        jFmtData.setEnabled(true);
+        jPwfSenha.setEnabled(true);
+        jChbAtivo.setEnabled(true);
+        jCboNivel.setEnabled(true);
         
-        jBtnConfirmar.setEnabled(valor);
-        jBtnCancelar.setEnabled(valor);
+        jBtnConfirmar.setEnabled(true);
+        jBtnCancelar.setEnabled(true);
         
-        jBtnIncluir.setEnabled(!valor);
-        jBtnAlterar.setEnabled(!valor);
-        jBtnExcluir.setEnabled(!valor);
-        jBtnPesquisar.setEnabled(!valor);
+        jBtnIncluir.setEnabled(false);
+        jBtnAlterar.setEnabled(false);
+        jBtnExcluir.setEnabled(false);
+        jBtnPesquisar.setEnabled(false);
     }
     
-    
-    public Usuarios viawbean(){
-      //int\/
-        Usuarios usuarios = new Usuarios();
-        int id = Integer.valueOf(JTxtCodigo.getText());
-        usuarios.setIdusuario(id);
+    public void desabilitar() {
+             
+        JTxtCodigo.setEnabled(false);
+        JTxtNome.setEnabled(false);
+        JTxtApelido.setEnabled(false);
+        jTxtCpf.setEnabled(false);
+        jFmtData.setEnabled(false);
+        jPwfSenha.setEnabled(false);
+        jChbAtivo.setEnabled(false);
+        jCboNivel.setEnabled(false);
         
-         //string\/
-        usuarios.setNome(JTxtNome.getText());
-        usuarios.setApelido(JTxtApelido.getText());
-        usuarios.setCpf(jTxtCpf.getText());
-         usuarios.setSenha(jPwfSenha.getText());
-         
-         //iindex\/
-        usuarios.setNivel(jCboNivel.getSelectedIndex());
-         //selected/boolean
-        if (jChbAtivo.isSelected()== true) {
-            usuarios.setAtivo("S");
-        }else{usuarios.setAtivo("N");}
-       
-         //data\/
-         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        jFmtData.getText();
-        try {
-          usuarios.setData_nasc(formato.parse(jFmtData.getText()));
-           } catch (ParseException ex) {
-        System.out.println("Erro:" + ex.getMessage());
-            }
+        jBtnConfirmar.setEnabled(false);
+        jBtnCancelar.setEnabled(false);
         
-        return usuarios;
+          jBtnIncluir.setEnabled(true);
+        jBtnAlterar.setEnabled(true);
+        jBtnExcluir.setEnabled(true);
+        jBtnPesquisar.setEnabled(true);
     }
-    public Usuarios beanviaw(Usuarios usuarios){
-         //int\/
-       JTxtCodigo.setText( String.valueOf(usuarios.getIdusuario() ) );
-        //string\/
-       JTxtNome.setText(usuarios.getNome());
-        JTxtApelido.setText(usuarios.getApelido());
-         jTxtCpf.setText(usuarios.getCpf());
-         jPwfSenha.setText(usuarios.getSenha());
-          //index\/
-       jCboNivel.setSelectedIndex(usuarios.getNivel());
-       //selected/boolean
-       if (usuarios.getAtivo().equals("S")) {
-            jChbAtivo.setSelected(true);
-       }else{jChbAtivo.setSelected(false);;}
-        //data\/
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        
-        jFmtData.setText(formato.format(usuarios.getData_nasc()));
-        return usuarios;
-      
-     
-    }
-    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -383,7 +347,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        habilitar(true);
+        habilitar();
         limparCampos();
         incl= true;
         
@@ -391,7 +355,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        habilitar(true);
+        habilitar();
         incl= false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -400,26 +364,25 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
          int resp =  JOptionPane.showConfirmDialog(null,  "deseja excluir?", "Pergunta", JOptionPane.YES_NO_OPTION);
        if(resp == JOptionPane.YES_OPTION){
-       Usuarios usuarios = viawbean();
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-        usuariosDAO.delete(usuarios);
+      
       }else{
-           Util.msg("aaaaaaaaa");
-          habilitar(false);
+           JOptionPane.showMessageDialog(null, "exclusão cancelada");
+           desabilitar();
           
        }
-       habilitar(true);
+       
         limparCampos();       
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jBtnAlterar);
+        if (incl ==true) {
+        }
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-         habilitar(false);
+        desabilitar();
      
         JOptionPane.showMessageDialog(null, "operação cancelada");
     }//GEN-LAST:event_jBtnCancelarActionPerformed
@@ -480,6 +443,22 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
