@@ -1,5 +1,5 @@
 package bean;
-// Generated 14/09/2023 14:18:15 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -55,6 +55,7 @@ public class AnimaisMr  implements java.io.Serializable {
        this.origemMr = origemMr;
        this.tamanhoMr = tamanhoMr;
        this.pesoMr = pesoMr;
+
     }
    
      @Id 
@@ -148,8 +149,6 @@ public class AnimaisMr  implements java.io.Serializable {
     public void setPesoMr(String pesoMr) {
         this.pesoMr = pesoMr;
     }
-
-
 
 
 

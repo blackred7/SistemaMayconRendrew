@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package view;
+import bean.FunionarioMr;
+import dao.FuncionarioDAO;
+
+import java.util.List;
 import javax.swing.JOptionPane;
 import view.IA.JDlgFuncionarioNovoIA;
 import view.controle.ControleFuncionario;
@@ -13,8 +17,11 @@ import view.tools.Util;
  * @author u13766540670
  */
 public class JDlgFuncionarioNovo extends javax.swing.JDialog {
-JDlgFuncionarioNovo jDlgFuncionarioNovo;
+
  ControleFuncionario controleFuncionario;
+ JDlgFuncionarioNovoIA jDlgFuncionarioNovoIA;
+ FuncionarioDAO funcionarioDAO;
+ FunionarioMr funcionario;
     /**
      * Creates new form JDlgUsuariosNovo
      */
@@ -23,9 +30,13 @@ JDlgFuncionarioNovo jDlgFuncionarioNovo;
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Funcionarios");
-
+ jDlgFuncionarioNovoIA = new JDlgFuncionarioNovoIA(null, true);
           controleFuncionario = new  ControleFuncionario();
-       
+         jDlgFuncionarioNovoIA = new JDlgFuncionarioNovoIA(null, true);
+        funcionarioDAO = new FuncionarioDAO();
+        List lista = funcionarioDAO.listAll();
+        
+       controleFuncionario.setList(lista);
         jTable1.setModel(controleFuncionario);
     }
     
@@ -107,18 +118,15 @@ JDlgFuncionarioNovo jDlgFuncionarioNovo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        jDlgFuncionarioNovo.setVisible(true);
-        jDlgFuncionarioNovo.setTitle("incluir");
+        jDlgFuncionarioNovoIA.setVisible(true);
+        jDlgFuncionarioNovoIA.setTitle("incluir");
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-       
-         if( Util.perguntar("deseja Alterar?", "Pergunta")== JOptionPane.YES_OPTION){
-        this.dispose();
-        jDlgFuncionarioNovo.setVisible(true);
-       jDlgFuncionarioNovo.setTitle("Alterar");
-        };
+        jDlgFuncionarioNovoIA.setVisible(true);
+       jDlgFuncionarioNovoIA.setTitle("Alterar");
+        
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -127,6 +135,12 @@ JDlgFuncionarioNovo jDlgFuncionarioNovo;
        
         if( Util.perguntar("deseja excluir?", "Pergunta")== JOptionPane.YES_OPTION){
         this.dispose();
+         int sel = jTable1.getSelectedRow();
+            funcionario = controleFuncionario.getbean(sel);
+            funcionarioDAO.delete(funcionario);
+            // Altera os registro da jtable
+            List lista = funcionarioDAO.listAll();
+            controleFuncionario.setList(lista);
         };
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed

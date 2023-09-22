@@ -4,17 +4,22 @@
  * and open the template in the editor.
  */
 package view;
+import dao.AnimaisDAO;
 import javax.swing.JOptionPane;
 import view.IA.JDlgAnimaisNovoIA;
 import view.controle.ControleAnimal;
 import view.tools.Util;
+import bean.AnimaisMr;
+import java.util.List;
 /**
  *
  * @author u13766540670
  */
 public class JDlgAnimaisNovo extends javax.swing.JDialog {
-JDlgAnimaisNovoIA jDlgAnimaisNovoIA;
-ControleAnimal controleAnimal;
+ ControleAnimal controleAnimal;
+ JDlgAnimaisNovoIA jDlgAnimaisNovoIA;
+ AnimaisDAO animaisDAO;
+ AnimaisMr ani;
     /**
      * Creates new form JDlgUsuariosNovo
      */
@@ -24,8 +29,12 @@ ControleAnimal controleAnimal;
         setLocationRelativeTo(null);
         setTitle("Funcionarios");
         jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
-         controleAnimal = new  ControleAnimal();
-       
+          controleAnimal = new  ControleAnimal();
+         jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
+        animaisDAO = new AnimaisDAO();
+        List lista = animaisDAO.listAll();
+        
+       controleAnimal.setList(lista);
         jTable1.setModel(controleAnimal);
     }
     

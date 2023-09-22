@@ -27,8 +27,10 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
     public JDLgUsuarios_pesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         usuarioControle = new  UsuarioControle();
-       
+          usuarioControle = new  UsuarioControle();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = usuariosDAO.listAll();
+        usuarioControle.setList(lista);
         jTable1.setModel(usuarioControle);
     }
 
@@ -109,7 +111,10 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-       int rowsel = jTable1.getSelectedRow();
+   int rowsel = jTable1.getSelectedRow();
+       
+       UsuarioMr usuarios = usuarioControle.getbean(rowsel);
+       jDlgUsuarios.beanviaw(usuarios);
        
       
        

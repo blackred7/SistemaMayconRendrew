@@ -1,5 +1,10 @@
 package view.IA;
 
+import bean.AnimaisMr;
+import bean.UsuarioMr;
+import dao.AnimaisDAO;
+import view.tools.Util;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,7 +25,21 @@ public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+public AnimaisMr viewBean() {
+        AnimaisMr ani = new AnimaisMr();    
+        ani.setIdAnimaisMr(Util.strInt(JTxtCodigo.getText()));
+         ani.setQuantidadeMr(Util.strInt(jTxtQuant.getText()));
+        ani.setNomeMr(JTxtNome.getText());
+       ani.setDescricaoMr(JTxtDescricao.getText());
+       ani.setEspecieMr(jTxtEspecie.getText());
+       ani.setOrigemMr(jTxtOrigem.getText());
+       ani.setPesoMr(jTxtPreco.getText());
+       ani.setTamanhoMr(jTxtTam.getText());
+       ani.setPrecoMr(jTxtPreco.getText());
+      
+     
+        return ani;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,6 +248,14 @@ public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+         //UsuarioMr usuarios = viewBean();
+      //  usuariosDAO.insert(usuarios);
+           AnimaisMr ani = viewBean();
+        AnimaisDAO animaisDAO = new AnimaisDAO();
+        animaisDAO.insert(ani);
+        setVisible(false);
+        this.dispose();
+        setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 

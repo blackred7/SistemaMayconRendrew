@@ -38,13 +38,17 @@ public  ClienteDAO(){
     @Override
     public void update(Object object) {
       session.beginTransaction();
-       session.update(object);
+        session.flush();
+session.clear();
+       session.delete(object);
        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-        session.beginTransaction();
+  session.beginTransaction();
+        session.flush();
+session.clear();
        session.delete(object);
        session.getTransaction().commit();
     }

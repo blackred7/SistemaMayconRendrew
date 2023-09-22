@@ -36,21 +36,25 @@ public  AnimaisDAO(){
 
     @Override
     public void insert(Object object) {
-       session.beginTransaction();
-       session.save(object);
-       session.getTransaction().commit();
+        session.beginTransaction();
+session.save(object);
+session.getTransaction().commit();
     }
 
     @Override
     public void update(Object object) {
-      session.beginTransaction();
-       session.update(object);
+     session.beginTransaction();
+        session.flush();
+session.clear();
+       session.delete(object);
        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
         session.beginTransaction();
+        session.flush();
+session.clear();
        session.delete(object);
        session.getTransaction().commit();
     }
@@ -76,6 +80,7 @@ public  AnimaisDAO(){
     }
     
     public static void main(String[] args) {
-        UsuariosDAO usuariosDAO= new UsuariosDAO();
+      
+        
     }
 }

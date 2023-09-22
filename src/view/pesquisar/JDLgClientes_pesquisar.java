@@ -28,7 +28,10 @@ public class JDLgClientes_pesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-         clienteControle = new  ClienteControle();
+          clienteControle = new  ClienteControle();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List lista = clienteDAO.listAll();
+        clienteControle.setList(lista);
      
       
         jTable1.setModel(clienteControle);
@@ -113,7 +116,9 @@ public class JDLgClientes_pesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
        int rowsel = jTable1.getSelectedRow();
        
-      
+       ClienteMr cliente = clienteControle.getbean(rowsel);
+       jDlgCliente.beanviaw(cliente);
+       
        
        
        

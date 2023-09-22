@@ -5,6 +5,7 @@
  */
 package view.controle;
 import bean.UsuarioMr;
+import bean.VendasMr;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 /**
@@ -13,7 +14,18 @@ import java.util.List;
  */
 public class VendasControle extends AbstractTableModel {
 
+private List lista;
 
+public void setList(List lista){
+this.lista=lista;
+}
+public  void setlist(List lista){
+this.lista = lista;
+}
+
+public VendasMr getbean(int linha){
+return (VendasMr) lista.get(linha);
+}
 
     @Override
     public int getRowCount() {
@@ -27,18 +39,18 @@ public class VendasControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+        VendasMr vendas = (VendasMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return null;
+             return vendas.getIdVendasMr();
         }
         if (columnIndex == 1) {
-             return null;
+             return vendas.getDataMr();
         }
         if (columnIndex == 2) {
-             return null;
+             return vendas.getQuantidadeTotalMr();
         }
         if (columnIndex == 3) {
-             return null;
+             return vendas.getValorTotalMr();
         
         }
        return null;

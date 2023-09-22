@@ -1,5 +1,5 @@
 package bean;
-// Generated 14/09/2023 14:18:15 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -29,7 +29,6 @@ public class ClienteMr  implements java.io.Serializable {
      private String emailMr;
      private String cepMr;
      private String rgMr;
-   
 
     public ClienteMr() {
     }
@@ -43,14 +42,13 @@ public class ClienteMr  implements java.io.Serializable {
         this.cepMr = cepMr;
         this.rgMr = rgMr;
     }
-    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, Set vendasMrs) {
+    public ClienteMr( UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, int idClienteMr) {
        this.idClienteMr = idClienteMr;
        this.usuarioMr = usuarioMr;
        this.nomeMr = nomeMr;
        this.emailMr = emailMr;
        this.cepMr = cepMr;
        this.rgMr = rgMr;
-     
     }
    
      @Id 
@@ -114,6 +112,8 @@ public class ClienteMr  implements java.io.Serializable {
     public void setRgMr(String rgMr) {
         this.rgMr = rgMr;
     }
+
+
 
 
 

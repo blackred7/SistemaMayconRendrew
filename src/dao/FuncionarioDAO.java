@@ -23,16 +23,12 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 
+
 /**
  *
  * @author u03402615100
  */
 public class FuncionarioDAO extends DAO_Abstract{
-public  FuncionarioDAO(){
-
-
-
-}
 
     @Override
     public void insert(Object object) {
@@ -44,6 +40,8 @@ public  FuncionarioDAO(){
     @Override
     public void update(Object object) {
       session.beginTransaction();
+      session.flush();
+session.clear();
        session.update(object);
        session.getTransaction().commit();
     }
@@ -51,6 +49,8 @@ public  FuncionarioDAO(){
     @Override
     public void delete(Object object) {
         session.beginTransaction();
+        session.flush();
+session.clear();
        session.delete(object);
        session.getTransaction().commit();
     }
@@ -59,7 +59,7 @@ public  FuncionarioDAO(){
     public Object list(int id) {
        session.beginTransaction();
        Criteria criteria = session.createCriteria(FunionarioMr.class);
-       criteria.add(Restrictions.eq("idUsuario_MR", id));
+       criteria.add(Restrictions.eq("idFunionario_MR", id));
         List lista = criteria.list();
         session.getTransaction().commit();
     return lista.get(0);

@@ -1,5 +1,5 @@
 package bean;
-// Generated 14/09/2023 14:18:15 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -45,7 +45,7 @@ public class VendasMr  implements java.io.Serializable {
         this.valorTotalMr = valorTotalMr;
         this.dataMr = dataMr;
     }
-    public VendasMr(int idVendasMr, ClienteMr clienteMr, FunionarioMr funionarioMr, int quantidadeTotalMr, String valorTotalMr, Date dataMr, Set vendasAnimaisMrs) {
+    public VendasMr(int idVendasMr, ClienteMr clienteMr, FunionarioMr funionarioMr, String valorTotalMr, Date dataMr, int quantidadeTotalMr) {
        this.idVendasMr = idVendasMr;
        this.clienteMr = clienteMr;
        this.funionarioMr = funionarioMr;

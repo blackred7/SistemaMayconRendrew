@@ -1,5 +1,8 @@
 package view.IA;
+import bean.FunionarioMr;
 import bean.UsuarioMr;
+import dao.FuncionarioDAO;
+import view.tools.Util;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +15,7 @@ import bean.UsuarioMr;
  * @author u13766540670
  */
 public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
-
+FuncionarioDAO funcionarioDAO;
     /**
      * Creates new form JDlgusuarioNovoIAa
      */
@@ -21,7 +24,19 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+     public FunionarioMr viewBean(){
+                 FunionarioMr funcionario = new FunionarioMr();    
+        funcionario.setIdFunionarioMr(Util.strInt(JTxtCodigo.getText()));
+         funcionario.setEmailMr(jTxtEmail.getText());
+        funcionario.setNomeMr(JTxtNome.getText());
+       funcionario.setNumeroTelMr(jTxtNumeroTel.getText());
+        funcionario.setSexoMr(jTxtSexo.getText());
+      
+     
+//        
+        return funcionario;
+        
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +57,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jTxtNumeroTel = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTxtNumeroTel1 = new javax.swing.JTextField();
+        jTxtSexo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jCboFk = new javax.swing.JComboBox<UsuarioMr>();
         jLabel3 = new javax.swing.JLabel();
@@ -102,9 +117,9 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
         jLabel7.setText("Numero de telefone");
 
-        jTxtNumeroTel1.addActionListener(new java.awt.event.ActionListener() {
+        jTxtSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtNumeroTel1ActionPerformed(evt);
+                jTxtSexoActionPerformed(evt);
             }
         });
 
@@ -141,7 +156,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addGap(11, 11, 11))
-                                    .addComponent(jTxtNumeroTel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTxtSexo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -183,7 +198,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtNumeroTel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -200,12 +215,14 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-
         this.dispose();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+         FunionarioMr funcionario = viewBean();
+        funcionarioDAO.insert(funcionario);
+        setVisible(false);
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -217,9 +234,9 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtNumeroTelActionPerformed
 
-    private void jTxtNumeroTel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNumeroTel1ActionPerformed
+    private void jTxtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtSexoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNumeroTel1ActionPerformed
+    }//GEN-LAST:event_jTxtSexoActionPerformed
 
     private void jCboFkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboFkActionPerformed
         // TODO add your handling code here:
@@ -297,6 +314,6 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTxtEmail;
     private javax.swing.JTextField jTxtNumeroTel;
-    private javax.swing.JTextField jTxtNumeroTel1;
+    private javax.swing.JTextField jTxtSexo;
     // End of variables declaration//GEN-END:variables
 }

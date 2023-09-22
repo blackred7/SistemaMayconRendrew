@@ -13,12 +13,25 @@ import java.util.List;
  */
 public class UsuarioControle extends AbstractTableModel {
 
+private List lista;
 
+public void setList(List lista){
+this.lista=lista;
+}
+public  void setlist(List lista){
+this.lista = lista;
+}
 
+public UsuarioMr getbean(int linha){
+return (UsuarioMr) lista.get(linha);
+}
     @Override
     public int getRowCount() {
-    return 4;
+        return lista.size();
     }
+
+    
+
 
     @Override
     public int getColumnCount() {
@@ -27,18 +40,18 @@ public class UsuarioControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+         UsuarioMr usu = (UsuarioMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return null;
+             return usu.getIdUsuarioMr();
         }
         if (columnIndex == 1) {
-             return null;
+             return usu.getNomeMr();
         }
         if (columnIndex == 2) {
-             return null;
+              return usu.getApelidoMr();
         }
         if (columnIndex == 3) {
-             return null;
+              return usu.getCpfMr();
         
         }
        return null;

@@ -44,7 +44,7 @@
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTxtNumeroTel1" alignment="1" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="jTxtSexo" alignment="1" min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -99,7 +99,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTxtNumeroTel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTxtSexo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -261,9 +261,9 @@
         <Property name="text" type="java.lang.String" value="Numero de telefone"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtNumeroTel1">
+    <Component class="javax.swing.JTextField" name="jTxtSexo">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtNumeroTel1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtSexoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
