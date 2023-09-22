@@ -1,5 +1,5 @@
 package bean;
-// Generated 14/09/2023 14:18:15 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class FunionarioMr  implements java.io.Serializable {
         this.emailMr = emailMr;
         this.numeroTelMr = numeroTelMr;
     }
-    public FunionarioMr(int idFunionarioMr, UsuarioMr usuarioMr, String nomeMr, String sexoMr, String emailMr, String numeroTelMr, Set vendasMrs) {
+    public FunionarioMr( UsuarioMr usuarioMr, String nomeMr, String numeroTelMr, String sexoMr, String emailMr, int idFunionarioMr) {
        this.idFunionarioMr = idFunionarioMr;
        this.usuarioMr = usuarioMr;
        this.nomeMr = nomeMr;
@@ -112,6 +112,8 @@ public class FunionarioMr  implements java.io.Serializable {
     public void setNumeroTelMr(String numeroTelMr) {
         this.numeroTelMr = numeroTelMr;
     }
+
+
 
 
 

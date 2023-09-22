@@ -8,6 +8,7 @@ package dao;
 import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -19,7 +20,8 @@ public abstract class DAO_Abstract {
     public Session session;     
     
     public DAO_Abstract(){
-            
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            session = sessionFactory.openSession(); 
         
     }
     

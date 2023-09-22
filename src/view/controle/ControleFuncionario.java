@@ -13,11 +13,21 @@ import java.util.List;
  */
 public class ControleFuncionario extends AbstractTableModel {
 
+private List lista;
 
+public void setList(List lista){
+this.lista=lista;
+}
+public  void setlist(List lista){
+this.lista = lista;
+}
 
+public FunionarioMr getbean(int linha){
+return (FunionarioMr) lista.get(linha);
+}
     @Override
     public int getRowCount() {
-    return 4;
+        return lista.size();
     }
 
     @Override
@@ -27,18 +37,18 @@ public class ControleFuncionario extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+        FunionarioMr funcionario = (FunionarioMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return null;
+             return funcionario.getIdFunionarioMr();
         }
         if (columnIndex == 1) {
-             return null;
+             return funcionario.getNomeMr();
         }
         if (columnIndex == 2) {
-             return null;
+             return funcionario.getEmailMr();
         }
         if (columnIndex == 3) {
-             return null;
+             return funcionario.getNumeroTelMr();
         
         }
        return null;
@@ -55,9 +65,10 @@ public class ControleFuncionario extends AbstractTableModel {
              return "Email";
         }
         if (columnIndex == 3) {
-             return "Telefone";
+             return "Numero";
         }
        
     return null;
     }
 }
+

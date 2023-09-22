@@ -7,7 +7,6 @@ package dao;
 
 
 import teste.testeJDBC;
-import bean.UsuarioMr;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import bean.UsuarioMr;
 
 
 /**
@@ -37,20 +37,24 @@ public  UsuariosDAO(){
     @Override
     public void insert(Object object) {
        session.beginTransaction();
-       session.save(object);
-       session.getTransaction().commit();
+session.save(object);
+session.getTransaction().commit();
     }
 
     @Override
     public void update(Object object) {
       session.beginTransaction();
-       session.update(object);
+        session.flush();
+session.clear();
+       session.delete(object);
        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-        session.beginTransaction();
+    session.beginTransaction();
+        session.flush();
+session.clear();
        session.delete(object);
        session.getTransaction().commit();
     }
@@ -76,6 +80,17 @@ public  UsuariosDAO(){
     }
     
     public static void main(String[] args) {
-        UsuariosDAO usuariosDAO= new UsuariosDAO();
+          UsuarioMr usuarios = new UsuarioMr();
+        usuarios.setIdUsuarioMr(88);
+        usuarios.setNomeMr("Bakarakas");
+        usuarios.setApelidoMr("bks");
+        usuarios.setCpfMr("345");
+        usuarios.setNivelMr(2);
+        usuarios.setAtivoMr("s");
+        usuarios.setSenhaMr("1qs453");
+        
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+       usuariosDAO.insert(usuarios);
+        System.out.println(usuarios);
     }
 }

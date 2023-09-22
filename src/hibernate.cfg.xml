@@ -46,12 +46,12 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_maycon_borges?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">maycon_borges</property>
     <property name="hibernate.connection.password">maycon_borges</property>
-    <mapping class="beam.UsuarioMr"/>
-    <mapping class="beam.VendasAnimaisMrId"/>
-    <mapping class="beam.VendasMr"/>
-    <mapping class="beam.VendasAnimaisMr"/>
-    <mapping class="beam.AnimaisMr"/>
-    <mapping class="beam.FunionarioMr"/>
-    <mapping class="beam.ClienteMr"/>
+    <mapping class="bean.VendasMr"/>
+    <mapping class="bean.FunionarioMr"/>
+    <mapping class="bean.ClienteMr"/>
+    <mapping class="bean.VendasAnimaisMrId"/>
+    <mapping class="bean.AnimaisMr"/>
+    <mapping class="bean.VendasAnimaisMr"/>
+    <mapping class="bean.UsuarioMr"/>
   </session-factory>
 </hibernate-configuration>

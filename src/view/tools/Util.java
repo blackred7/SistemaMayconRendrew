@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 package view.tools;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+
+import view.JDlgUsuarios;
             
 
 /**
@@ -25,13 +33,23 @@ public class Util {
     }
     
     public static void limp(JComponent ... vetCamp) {
-        for (int i = 0; i < vetCamp.length; i++) {
+        for (JComponent componente : vetCamp) {
             
-            
-           ((JTextField) vetCamp[i]).setText("");
+            if (componente instanceof JTextField) {
+                JTextField obj = (JTextField) componente;
+                obj.setText("");
+            } else  if (componente instanceof JComboBox) {
+                JComboBox obj = (JComboBox) componente;
+                obj.setSelectedIndex(-1);
+            } else  if (componente instanceof JCheckBox) {
+                JCheckBox obj = (JCheckBox) componente;
+                obj.setSelected(false);
+            } 
+        }
+           
             
         }
-    }
+    
     public static void msg( String mensagem) {
          JOptionPane.showMessageDialog(null, mensagem);
     }
@@ -40,21 +58,31 @@ public class Util {
         
     }
     public static int strInt(String cad) {
-        return 0;
+          
+        return  Integer.valueOf(cad);
     }
      public static String intStr(int num) {
-        return "" ;
+         
+        
+        return String.valueOf(num) ;
     }
      public static double strDouble(String cad) {
-        return 0;
+        return Double.valueOf(cad);
     }
       public static String doubleStr(String num) {
-        return "";
+        return String.valueOf(num);
     }
-      public static Date strData(String cad) {
+      public static java.util.Date strData(String cad) {
+          try {
+            SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yyyy");
+            return formato.parse(cad);
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
       public static String dataStr(String data) {
-        return "";
+          SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+        return formato.format(data);
     }
 }

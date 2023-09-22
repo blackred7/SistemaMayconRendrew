@@ -43,14 +43,18 @@ public  VendasDAO(){
 
     @Override
     public void update(Object object) {
-      session.beginTransaction();
-       session.update(object);
+  session.beginTransaction();
+        session.flush();
+session.clear();
+       session.delete(object);
        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-        session.beginTransaction();
+ session.beginTransaction();
+        session.flush();
+session.clear();
        session.delete(object);
        session.getTransaction().commit();
     }

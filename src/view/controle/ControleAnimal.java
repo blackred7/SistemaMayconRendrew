@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package view.controle;
-import bean.FunionarioMr;
+
+import bean.AnimaisMr;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 /**
@@ -13,11 +14,21 @@ import java.util.List;
  */
 public class ControleAnimal extends AbstractTableModel {
 
+private List lista;
 
+public void setList(List lista){
+this.lista=lista;
+}
+public  void setlist(List lista){
+this.lista = lista;
+}
 
+public AnimaisMr getbean(int linha){
+return (AnimaisMr) lista.get(linha);
+}
     @Override
     public int getRowCount() {
-    return 4;
+        return lista.size();
     }
 
     @Override
@@ -27,18 +38,18 @@ public class ControleAnimal extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+        AnimaisMr ani = (AnimaisMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return null;
+             return ani.getIdAnimaisMr();
         }
         if (columnIndex == 1) {
-             return null;
+             return ani.getNomeMr();
         }
         if (columnIndex == 2) {
-             return null;
+             return ani.getPrecoMr();
         }
         if (columnIndex == 3) {
-             return null;
+             return ani.getQuantidadeMr();
         
         }
        return null;

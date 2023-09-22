@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view.controle;
+
 import bean.ClienteMr;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -14,7 +15,18 @@ import java.util.List;
 public class ClienteControle extends AbstractTableModel {
 
 
+private List lista;
 
+public void setList(List lista){
+this.lista=lista;
+}
+public  void setlist(List lista){
+this.lista = lista;
+}
+
+public ClienteMr getbean(int linha){
+return (ClienteMr) lista.get(linha);
+}
 
 
     @Override
@@ -29,18 +41,18 @@ public class ClienteControle extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       
+       ClienteMr cliente = (ClienteMr) lista.get(rowIndex); cliente = (ClienteMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return null;
+             return cliente.getIdClienteMr();
         }
         if (columnIndex == 1) {
-             return null;
+             return cliente.getNomeMr();
         }
         if (columnIndex == 2) {
-             return null;
+             return cliente.getEmailMr();
         }
         if (columnIndex == 3) {
-             return null;
+             return cliente.getRgMr();
         
         }
        return null;
