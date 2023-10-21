@@ -141,7 +141,11 @@ public class UsuarioMr  implements java.io.Serializable {
         this.ativoMr = ativoMr;
     }
 
-
+@Override
+      public String toString(){
+          return getNomeMr();
+          
+}
 
 
 }

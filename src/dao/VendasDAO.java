@@ -46,7 +46,7 @@ public  VendasDAO(){
   session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 

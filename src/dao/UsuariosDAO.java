@@ -46,7 +46,7 @@ session.getTransaction().commit();
       session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 
@@ -79,6 +79,25 @@ session.clear();
      
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+     public List busca(String tab, String var){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.eq(tab, var ));
+          List lista = criteria.list();
+       
+        session.getTransaction().commit();
+    return  lista;
+    }    
     public static void main(String[] args) {
           UsuarioMr usuarios = new UsuarioMr();
         usuarios.setIdUsuarioMr(88);

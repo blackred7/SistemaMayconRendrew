@@ -46,7 +46,7 @@ session.getTransaction().commit();
      session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 
@@ -78,6 +78,17 @@ session.clear();
     return lista;
      
     }
+    
+    public List listNome(String nome){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(AnimaisMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
     
     public static void main(String[] args) {
       

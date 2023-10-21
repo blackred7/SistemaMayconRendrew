@@ -113,7 +113,11 @@ public class ClienteMr  implements java.io.Serializable {
         this.rgMr = rgMr;
     }
 
-
+@Override
+      public String toString(){
+          return getNomeMr();
+          
+}
 
 
 

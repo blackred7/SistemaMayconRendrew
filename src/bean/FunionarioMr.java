@@ -113,7 +113,11 @@ public class FunionarioMr  implements java.io.Serializable {
         this.numeroTelMr = numeroTelMr;
     }
 
-
+     @Override
+ public String toString(){
+          return getNomeMr();
+          
+}
 
 
 
