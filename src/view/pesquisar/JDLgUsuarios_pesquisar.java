@@ -26,9 +26,11 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
      */
     public JDLgUsuarios_pesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents(); 
+        setLocationRelativeTo(null);
           usuarioControle = new  UsuarioControle();
         UsuariosDAO usuariosDAO = new UsuariosDAO();
+          
         List lista = usuariosDAO.listAll();
         usuarioControle.setList(lista);
         jTable1.setModel(usuarioControle);
@@ -88,12 +90,12 @@ public class JDLgUsuarios_pesquisar extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(608, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnConfirmar)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnCancelar)
                 .addContainerGap())
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
