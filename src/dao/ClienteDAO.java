@@ -28,25 +28,26 @@ public  ClienteDAO(){
 
 }
 
-    @Override
+     @Override
     public void insert(Object object) {
        session.beginTransaction();
-       session.save(object);
-       session.getTransaction().commit();
+session.save(object);
+session.getTransaction().commit();
     }
+
 
     @Override
     public void update(Object object) {
       session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+      session.update(object);
        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-  session.beginTransaction();
+   session.beginTransaction();
         session.flush();
 session.clear();
        session.delete(object);
@@ -72,4 +73,35 @@ session.clear();
     return lista;
      
     }
+    public List listNome(String nome){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(ClienteMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+    public List listNomeCep(String nome, String cep){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(ClienteMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        criteria.add(Restrictions.like("cepMr", "%" + cep + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+    public List listCep(String cep){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(ClienteMr.class);
+        criteria.add(Restrictions.like("cepMr", "%" + cep + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
 }

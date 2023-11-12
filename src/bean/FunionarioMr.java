@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
+// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,15 +26,16 @@ public class FunionarioMr  implements java.io.Serializable {
      private int idFunionarioMr;
      private UsuarioMr usuarioMr;
      private String nomeMr;
-     private String sexoMr;
+     private int sexoMr;
      private String emailMr;
      private String numeroTelMr;
+   
 
     public FunionarioMr() {
     }
 
 	
-    public FunionarioMr(int idFunionarioMr, UsuarioMr usuarioMr, String nomeMr, String sexoMr, String emailMr, String numeroTelMr) {
+    public FunionarioMr(int idFunionarioMr, UsuarioMr usuarioMr, String nomeMr, int sexoMr, String emailMr, String numeroTelMr) {
         this.idFunionarioMr = idFunionarioMr;
         this.usuarioMr = usuarioMr;
         this.nomeMr = nomeMr;
@@ -42,13 +43,14 @@ public class FunionarioMr  implements java.io.Serializable {
         this.emailMr = emailMr;
         this.numeroTelMr = numeroTelMr;
     }
-    public FunionarioMr( UsuarioMr usuarioMr, String nomeMr, String numeroTelMr, String sexoMr, String emailMr, int idFunionarioMr) {
+    public FunionarioMr( UsuarioMr usuarioMr, String nomeMr, int sexoMr, String emailMr, String numeroTelMr, int idFunionarioMr) {
        this.idFunionarioMr = idFunionarioMr;
        this.usuarioMr = usuarioMr;
        this.nomeMr = nomeMr;
        this.sexoMr = sexoMr;
        this.emailMr = emailMr;
        this.numeroTelMr = numeroTelMr;
+      
     }
    
      @Id 
@@ -85,11 +87,11 @@ public class FunionarioMr  implements java.io.Serializable {
 
     
     @Column(name="Sexo_MR", nullable=false, length=1)
-    public String getSexoMr() {
+    public int getSexoMr() {
         return this.sexoMr;
     }
     
-    public void setSexoMr(String sexoMr) {
+    public void setSexoMr(int sexoMr) {
         this.sexoMr = sexoMr;
     }
 
@@ -113,6 +115,12 @@ public class FunionarioMr  implements java.io.Serializable {
         this.numeroTelMr = numeroTelMr;
     }
 
+@Override
+     public  String toString(){
+    
+         return this.getNomeMr();
+
+}
 
 
 

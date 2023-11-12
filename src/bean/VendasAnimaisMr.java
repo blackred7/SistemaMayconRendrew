@@ -1,5 +1,6 @@
 package bean;
-// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
+// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+
 
 
 import javax.persistence.AttributeOverride;
@@ -28,12 +29,12 @@ public class VendasAnimaisMr  implements java.io.Serializable {
      private AnimaisMr animaisMr;
      private VendasMr vendasMr;
      private int quantidadeUnitariaMr;
-     private String valorUnitarioMr;
+     private double valorUnitarioMr;
 
     public VendasAnimaisMr() {
     }
 
-    public VendasAnimaisMr(VendasAnimaisMrId id, AnimaisMr animaisMr, VendasMr vendasMr, int quantidadeUnitariaMr, String valorUnitarioMr) {
+    public VendasAnimaisMr(VendasAnimaisMrId id, AnimaisMr animaisMr, VendasMr vendasMr, int quantidadeUnitariaMr, double valorUnitarioMr) {
        this.id = id;
        this.animaisMr = animaisMr;
        this.vendasMr = vendasMr;
@@ -87,12 +88,12 @@ public class VendasAnimaisMr  implements java.io.Serializable {
     }
 
     
-    @Column(name="Valor_unitario_MR", nullable=false, length=100)
-    public String getValorUnitarioMr() {
+    @Column(name="Valor_unitario_MR", nullable=false, precision=12)
+    public double getValorUnitarioMr() {
         return this.valorUnitarioMr;
     }
     
-    public void setValorUnitarioMr(String valorUnitarioMr) {
+    public void setValorUnitarioMr(double valorUnitarioMr) {
         this.valorUnitarioMr = valorUnitarioMr;
     }
 

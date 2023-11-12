@@ -1,7 +1,8 @@
 package bean;
-// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
+// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
 
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -25,17 +26,18 @@ public class AnimaisMr  implements java.io.Serializable {
      private String nomeMr;
      private String descricaoMr;
      private String especieMr;
-     private String precoMr;
+     private double precoMr;
      private int quantidadeMr;
      private String origemMr;
      private String tamanhoMr;
      private String pesoMr;
+   
 
     public AnimaisMr() {
     }
 
 	
-    public AnimaisMr(int idAnimaisMr, String nomeMr, String descricaoMr, String especieMr, String precoMr, int quantidadeMr, String origemMr, String tamanhoMr) {
+    public AnimaisMr(int idAnimaisMr, String nomeMr, String descricaoMr, String especieMr, double precoMr, int quantidadeMr, String origemMr, String tamanhoMr) {
         this.idAnimaisMr = idAnimaisMr;
         this.nomeMr = nomeMr;
         this.descricaoMr = descricaoMr;
@@ -45,7 +47,7 @@ public class AnimaisMr  implements java.io.Serializable {
         this.origemMr = origemMr;
         this.tamanhoMr = tamanhoMr;
     }
-    public AnimaisMr(int idAnimaisMr, String nomeMr, String descricaoMr, String especieMr, String precoMr, int quantidadeMr, String origemMr, String tamanhoMr, String pesoMr) {
+    public AnimaisMr(int idAnimaisMr, String nomeMr, String descricaoMr, String especieMr, double precoMr, int quantidadeMr, String origemMr, String tamanhoMr, String pesoMr) {
        this.idAnimaisMr = idAnimaisMr;
        this.nomeMr = nomeMr;
        this.descricaoMr = descricaoMr;
@@ -55,7 +57,7 @@ public class AnimaisMr  implements java.io.Serializable {
        this.origemMr = origemMr;
        this.tamanhoMr = tamanhoMr;
        this.pesoMr = pesoMr;
-
+      
     }
    
      @Id 
@@ -101,12 +103,12 @@ public class AnimaisMr  implements java.io.Serializable {
     }
 
     
-    @Column(name="Preco_MR", nullable=false, length=20)
-    public String getPrecoMr() {
+    @Column(name="Preco_MR", nullable=false, precision=10)
+    public double getPrecoMr() {
         return this.precoMr;
     }
     
-    public void setPrecoMr(String precoMr) {
+    public void setPrecoMr(double precoMr) {
         this.precoMr = precoMr;
     }
 
@@ -151,6 +153,13 @@ public class AnimaisMr  implements java.io.Serializable {
     }
 
 
+
+@Override
+     public  String toString(){
+    
+         return this.getNomeMr();
+
+}
 
 
 }

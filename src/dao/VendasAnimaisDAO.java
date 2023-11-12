@@ -27,8 +27,8 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u03402615100
  */
-public class VendasAnimais extends DAO_Abstract{
-public  VendasAnimais(){
+public class VendasAnimaisDAO extends DAO_Abstract{
+public  VendasAnimaisDAO(){
 
 
 
@@ -46,7 +46,7 @@ public  VendasAnimais(){
     session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 
@@ -79,7 +79,5 @@ session.clear();
      
     }
     
-    public static void main(String[] args) {
-        UsuariosDAO usuariosDAO= new UsuariosDAO();
-    }
+  
 }

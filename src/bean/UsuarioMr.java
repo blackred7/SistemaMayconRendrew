@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
+// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -48,7 +48,7 @@ public class UsuarioMr  implements java.io.Serializable {
         this.nivelMr = nivelMr;
         this.ativoMr = ativoMr;
     }
-    public UsuarioMr(int idUsuarioMr, String nomeMr, Date nascMr, String senhaMr, String cpfMr, int nivelMr, String ativoMr, String apelidoMr) {
+    public UsuarioMr( String nomeMr, Date nascMr, String senhaMr, String apelidoMr, String cpfMr, int nivelMr, String ativoMr, int idUsuarioMr) {
        this.idUsuarioMr = idUsuarioMr;
        this.nomeMr = nomeMr;
        this.nascMr = nascMr;
@@ -57,7 +57,8 @@ public class UsuarioMr  implements java.io.Serializable {
        this.cpfMr = cpfMr;
        this.nivelMr = nivelMr;
        this.ativoMr = ativoMr;
-          }
+      
+    }
    
      @Id 
 
@@ -141,6 +142,13 @@ public class UsuarioMr  implements java.io.Serializable {
         this.ativoMr = ativoMr;
     }
 
+
+@Override
+     public  String toString(){
+    
+         return this.getNomeMr();
+
+}
 
 
 

@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 15:04:01 by Hibernate Tools 4.3.1
+// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,32 +23,61 @@ import javax.persistence.Table;
 public class ClienteMr  implements java.io.Serializable {
 
 
-     private int idClienteMr;
-     private UsuarioMr usuarioMr;
-     private String nomeMr;
-     private String emailMr;
-     private String cepMr;
-     private String rgMr;
+     private int idClienteMr;//s
+     private UsuarioMr usuarioMr;//s
+     private String nomeMr;//s
+     private String emailMr;//s
+     private String cepMr;//s
+     private String rgMr;//s
+     private String descricaoMr;//s
+     private String numTelMr;
+     private int sexoMr;
+     private String nomeBancoMr;//s
+     private String agenciaBancoMr;//s
+     private String numeroBancoMr;//s
+     private String ruaMr;//s
+     private String bairroMr;//s
+     private String numCasaMr;//s
+    
 
     public ClienteMr() {
     }
 
 	
-    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr) {
+    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr,int sexoMr,String descricaoMr,String numTelMr, String nomeMr, String emailMr, String cepMr, String rgMr, String nomeBancoMr, String agenciaBancoMr, String numeroBancoMr, String ruaMr, String bairroMr, String numCasaMr) {
         this.idClienteMr = idClienteMr;
         this.usuarioMr = usuarioMr;
         this.nomeMr = nomeMr;
         this.emailMr = emailMr;
         this.cepMr = cepMr;
         this.rgMr = rgMr;
+        this.descricaoMr = descricaoMr;
+        this.numTelMr = numTelMr;
+        this.sexoMr = sexoMr;
+        this.nomeBancoMr = nomeBancoMr;
+        this.agenciaBancoMr = agenciaBancoMr;
+        this.numeroBancoMr = numeroBancoMr;
+        this.ruaMr = ruaMr;
+        this.bairroMr = bairroMr;
+        this.numCasaMr = numCasaMr;
+        
     }
-    public ClienteMr( UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, int idClienteMr) {
+    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, String descricaoMr, String numTelMr, int sexoMr, String nomeBancoMr, String agenciaBancoMr, String numeroBancoMr, String ruaMr, String bairroMr, String numCasaMr) {
        this.idClienteMr = idClienteMr;
        this.usuarioMr = usuarioMr;
        this.nomeMr = nomeMr;
        this.emailMr = emailMr;
        this.cepMr = cepMr;
        this.rgMr = rgMr;
+       this.descricaoMr = descricaoMr;
+       this.numTelMr = numTelMr;
+       this.sexoMr = sexoMr;
+       this.nomeBancoMr = nomeBancoMr;
+       this.agenciaBancoMr = agenciaBancoMr;
+       this.numeroBancoMr = numeroBancoMr;
+       this.ruaMr = ruaMr;
+       this.bairroMr = bairroMr;
+       this.numCasaMr = numCasaMr;
     }
    
      @Id 
@@ -113,7 +142,103 @@ public class ClienteMr  implements java.io.Serializable {
         this.rgMr = rgMr;
     }
 
+    
+    @Column(name="Descricao_MR", length=200)
+    public String getDescricaoMr() {
+        return this.descricaoMr;
+    }
+    
+    public void setDescricaoMr(String descricaoMr) {
+        this.descricaoMr = descricaoMr;
+    }
 
+    
+    @Column(name="Num_tel_MR", length=13)
+    public String getNumTelMr() {
+        return this.numTelMr;
+    }
+    
+    public void setNumTelMr(String numTelMr) {
+        this.numTelMr = numTelMr;
+    }
+
+    
+    @Column(name="Sexo_MR", length=1)
+    public int getSexoMr() {
+        return this.sexoMr;
+    }
+    
+    public void setSexoMr(int sexoMr) {
+        this.sexoMr = sexoMr;
+    }
+
+    
+    @Column(name="NomeBanco_MR", nullable=false, length=45)
+    public String getNomeBancoMr() {
+        return this.nomeBancoMr;
+    }
+    
+    public void setNomeBancoMr(String nomeBancoMr) {
+        this.nomeBancoMr = nomeBancoMr;
+    }
+
+    
+    @Column(name="AgenciaBanco_MR", nullable=false, length=45)
+    public String getAgenciaBancoMr() {
+        return this.agenciaBancoMr;
+    }
+    
+    public void setAgenciaBancoMr(String agenciaBancoMr) {
+        this.agenciaBancoMr = agenciaBancoMr;
+    }
+
+    
+    @Column(name="NumeroBanco_MR", nullable=false, length=45)
+    public String getNumeroBancoMr() {
+        return this.numeroBancoMr;
+    }
+    
+    public void setNumeroBancoMr(String numeroBancoMr) {
+        this.numeroBancoMr = numeroBancoMr;
+    }
+
+    
+    @Column(name="Rua_MR", nullable=false, length=45)
+    public String getRuaMr() {
+        return this.ruaMr;
+    }
+    
+    public void setRuaMr(String ruaMr) {
+        this.ruaMr = ruaMr;
+    }
+
+    
+    @Column(name="Bairro_MR", nullable=false, length=45)
+    public String getBairroMr() {
+        return this.bairroMr;
+    }
+    
+    public void setBairroMr(String bairroMr) {
+        this.bairroMr = bairroMr;
+    }
+
+    
+    @Column(name="NumCasa_MR", nullable=false, length=45)
+    public String getNumCasaMr() {
+        return this.numCasaMr;
+    }
+    
+    public void setNumCasaMr(String numCasaMr) {
+        this.numCasaMr = numCasaMr;
+    }
+
+
+     @Override
+     public  String toString(){
+    
+         return this.getNomeMr();
+
+}
 
 
 

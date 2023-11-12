@@ -32,9 +32,9 @@ public class FuncionarioDAO extends DAO_Abstract{
 
     @Override
     public void insert(Object object) {
-       session.beginTransaction();
-       session.save(object);
-       session.getTransaction().commit();
+        session.beginTransaction();
+session.save(object);
+session.getTransaction().commit();
     }
 
     @Override
@@ -42,8 +42,8 @@ public class FuncionarioDAO extends DAO_Abstract{
       session.beginTransaction();
       session.flush();
 session.clear();
-       session.update(object);
-       session.getTransaction().commit();
+session.update(object);     
+session.getTransaction().commit();
     }
 
     @Override
@@ -75,7 +75,36 @@ session.clear();
      
     }
     
-    public static void main(String[] args) {
-        UsuariosDAO usuariosDAO= new UsuariosDAO();
-    }
+     public List listNome(String nome){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(FunionarioMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+     public List listSexo(int sexo){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(FunionarioMr.class);
+        criteria.add(Restrictions.eq("sexoMr", sexo));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }   
+      public List listNomeSexo(String nome, int sexo){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(FunionarioMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("sexoMr",  sexo ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }  
+  
 }

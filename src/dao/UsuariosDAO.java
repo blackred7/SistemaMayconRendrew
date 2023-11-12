@@ -46,7 +46,7 @@ session.getTransaction().commit();
       session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 
@@ -79,18 +79,48 @@ session.clear();
      
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));      
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+     public List listAtivo(String ativo){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.like("ativoMr",  ativo ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }   
+      public List listNomeAtivo(String nome, String ativo){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.like("nomeMr", "%" + nome + "%"));
+        criteria.add(Restrictions.like("ativoMr",  ativo ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }  
+     
+     public List busca(String tab, String var){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(UsuarioMr.class);
+        criteria.add(Restrictions.eq(tab, var ));
+          List lista = criteria.list();
+       
+        session.getTransaction().commit();
+    return  lista;
+    }    
     public static void main(String[] args) {
-          UsuarioMr usuarios = new UsuarioMr();
-        usuarios.setIdUsuarioMr(88);
-        usuarios.setNomeMr("Bakarakas");
-        usuarios.setApelidoMr("bks");
-        usuarios.setCpfMr("345");
-        usuarios.setNivelMr(2);
-        usuarios.setAtivoMr("s");
-        usuarios.setSenhaMr("1qs453");
         
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-       usuariosDAO.insert(usuarios);
-        System.out.println(usuarios);
     }
 }

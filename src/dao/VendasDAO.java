@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
@@ -46,7 +47,7 @@ public  VendasDAO(){
   session.beginTransaction();
         session.flush();
 session.clear();
-       session.delete(object);
+       session.update(object);
        session.getTransaction().commit();
     }
 
@@ -78,8 +79,39 @@ session.clear();
     return lista;
      
     }
+     public List listValor(double valor){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasMr.class);
+        criteria.add(Restrictions.le("valorTotalMr",  valor ));      
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
     
+    }    
+       public List listValorQuant(double valor, int quant){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasMr.class);
+        criteria.add(Restrictions.le("valorTotalMr",  valor ));      
+        criteria.add(Restrictions.le("quantidadeTotalMr", quant));      
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }    
+        public List listQuant(int quant){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasMr.class);   
+        criteria.add(Restrictions.le("quantidadeTotalMr", quant));      
+        List lista = criteria.list();
+        session.getTransaction().commit();
+    return lista;
+   
+    
+    }   
+       
     public static void main(String[] args) {
-        UsuariosDAO usuariosDAO= new UsuariosDAO();
+        System.out.println("dao.VendasDAO.main()");
     }
 }
