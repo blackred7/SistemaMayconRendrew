@@ -3,6 +3,8 @@ package view.IA;
 import bean.AnimaisMr;
 import bean.UsuarioMr;
 import dao.AnimaisDAO;
+import java.util.List;
+import view.controle.ControleAnimal;
 import view.tools.Util;
 
 /*
@@ -16,7 +18,7 @@ import view.tools.Util;
  * @author u13766540670
  */
 public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
-
+ ControleAnimal controleAnimal;
     /**
      * Creates new form JDlgusuarioNovoIAa
      */
@@ -27,6 +29,7 @@ public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
     }
 public AnimaisMr viewBean() {
         AnimaisMr ani = new AnimaisMr();    
+        
         ani.setIdAnimaisMr(Util.strInt(JTxtCodigo.getText()));
          ani.setQuantidadeMr(Util.strInt(jTxtQuant.getText()));
         ani.setNomeMr(JTxtNome.getText());
@@ -35,7 +38,7 @@ public AnimaisMr viewBean() {
        ani.setOrigemMr(jTxtOrigem.getText());
        ani.setPesoMr(jTxtPreco.getText());
        ani.setTamanhoMr(jTxtTam.getText());
-       ani.setPrecoMr(jTxtPreco.getText());
+       ani.setPrecoMr(Util.strDouble(jTxtPreco.getText()));
       
      
         return ani;
@@ -95,6 +98,7 @@ public AnimaisMr viewBean() {
         flowLayout1.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout1);
 
+        jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +107,7 @@ public AnimaisMr viewBean() {
         });
         jPanel1.add(jBtnOk);
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +231,7 @@ public AnimaisMr viewBean() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -253,9 +258,8 @@ public AnimaisMr viewBean() {
            AnimaisMr ani = viewBean();
         AnimaisDAO animaisDAO = new AnimaisDAO();
         animaisDAO.insert(ani);
-        setVisible(false);
-        this.dispose();
-        setVisible(false);
+      
+        
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 

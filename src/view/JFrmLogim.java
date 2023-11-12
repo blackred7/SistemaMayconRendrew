@@ -7,6 +7,8 @@ package view;
 
 import bean.UsuarioMr;
 import dao.UsuariosDAO;
+import java.util.List;
+import javax.print.DocFlavor;
 import javax.swing.JOptionPane;
 
 
@@ -16,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class JFrmLogim extends javax.swing.JFrame {
  
- int Cont;
+ int tentativa;
  
  
     /**
@@ -151,14 +153,15 @@ public class JFrmLogim extends javax.swing.JFrame {
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
       
+UsuariosDAO usuariosDAO = new UsuariosDAO();
+         
+                      
 
-        
-      
-      
+     
     
        
-        if(Cont<3){ 
-        if (JTxtUsuario.getText().equals("maycon")&& jPwfSenha.getText().equals("123")  ) { 
+        if(tentativa<3){ 
+        if ( usuariosDAO.busca("apelidoMr", JTxtUsuario.getText()).size() !=0 && usuariosDAO.busca("senhaMr", jPwfSenha.getText()).size()!=0) { 
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
             jFrmPrincipal.setVisible(true) ;
         
@@ -171,8 +174,10 @@ public class JFrmLogim extends javax.swing.JFrame {
         }else{ 
            
           JOptionPane.showMessageDialog(null, "Senha ou Usuario incorretas");
-         Cont = Cont+1;
-        }}else{ System.exit(0);}
+         tentativa = tentativa+1;
+        }}else{
+             JOptionPane.showMessageDialog(null, "Numeros de tentativas exedidas");
+            System.exit(0);}
     }//GEN-LAST:event_jBtnEntrarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

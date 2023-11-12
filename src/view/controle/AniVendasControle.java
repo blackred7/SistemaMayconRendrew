@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package view.controle;
-import bean.UsuarioMr;
-import bean.VendasMr;
+import bean.VendasAnimaisMr;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 /**
  *
  * @author u13766540670
  */
-public class VendasControle extends AbstractTableModel {
+public class AniVendasControle extends AbstractTableModel {
 
 private List lista;
 
@@ -23,13 +23,13 @@ public  void setlist(List lista){
 this.lista = lista;
 }
 
-public VendasMr getbean(int linha){
-return (VendasMr) lista.get(linha);
+public VendasAnimaisMr getbean(int linha){
+return (VendasAnimaisMr) lista.get(linha);
 }
 
     @Override
     public int getRowCount() {
-    return 4;
+ return lista.size();
     }
 
     @Override
@@ -39,18 +39,18 @@ return (VendasMr) lista.get(linha);
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        VendasMr vendas = (VendasMr) lista.get(rowIndex);
+        VendasAnimaisMr vendas = (VendasAnimaisMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return vendas.getIdVendasMr();
+             return vendas.getId();
         }
         if (columnIndex == 1) {
-             return vendas.getDataMr();
+             return vendas.getAnimaisMr();
         }
         if (columnIndex == 2) {
-             return vendas.getQuantidadeTotalMr();
+             return vendas.getVendasMr();
         }
         if (columnIndex == 3) {
-             return vendas.getValorTotalMr();
+             return vendas.getQuantidadeUnitariaMr();
         
         }
        return null;
@@ -61,10 +61,10 @@ return (VendasMr) lista.get(linha);
              return "ID";
         }
         if (columnIndex == 1) {
-             return "Data";
+             return "Animais";
         }
         if (columnIndex == 2) {
-             return "Quantidade";
+             return "Vendas";
         }
         if (columnIndex == 3) {
              return "Valor";

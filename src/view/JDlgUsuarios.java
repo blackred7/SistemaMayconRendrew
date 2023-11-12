@@ -67,7 +67,9 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             jChbAtivo.setSelected(true);
        }else{jChbAtivo.setSelected(false);}
         //data\/
-        jFmtData.setText("11/11/1111");
+      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//        
+      jFmtData.setText(formato.format(usuarios.getNascMr()));
         return usuarios;
   
      

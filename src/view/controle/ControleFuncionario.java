@@ -48,7 +48,17 @@ return (FunionarioMr) lista.get(linha);
              return funcionario.getEmailMr();
         }
         if (columnIndex == 3) {
-             return funcionario.getNumeroTelMr();
+            
+            if ( funcionario.getSexoMr() == 0) {
+                 return "Homem";
+            } else if (funcionario.getSexoMr() == 1) {
+                return "Mulher";
+            } else if (funcionario.getSexoMr() == 2) {
+                return "Não indentificado";
+            } else if (funcionario.getSexoMr() == 3) {
+                return "pastel";
+            }
+             return "valor não encontrado";
         
         }
        return null;
@@ -65,7 +75,7 @@ return (FunionarioMr) lista.get(linha);
              return "Email";
         }
         if (columnIndex == 3) {
-             return "Numero";
+             return "Sexo";
         }
        
     return null;

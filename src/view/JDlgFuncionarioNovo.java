@@ -22,6 +22,8 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
  JDlgFuncionarioNovoIA jDlgFuncionarioNovoIA;
  FuncionarioDAO funcionarioDAO;
  FunionarioMr funcionario;
+ 
+ 
     /**
      * Creates new form JDlgUsuariosNovo
      */
@@ -36,12 +38,16 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
         funcionarioDAO = new FuncionarioDAO();
         List lista = funcionarioDAO.listAll();
         
-       controleFuncionario.setList(lista);
-        jTable1.setModel(controleFuncionario);
+      carregar();
+        
     }
     
    
-
+public void carregar(){
+     List lista = funcionarioDAO.listAll();
+ controleFuncionario.setList(lista);
+        jTable1.setModel(controleFuncionario);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,6 +81,7 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +90,7 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
         });
         jPanel1.add(jBtnIncluir);
 
+        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +99,7 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
         });
         jPanel1.add(jBtnAlterar);
 
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,13 +143,12 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
         // TODO add your handling code here:
        
         if( Util.perguntar("deseja excluir?", "Pergunta")== JOptionPane.YES_OPTION){
-        this.dispose();
+       
          int sel = jTable1.getSelectedRow();
             funcionario = controleFuncionario.getbean(sel);
             funcionarioDAO.delete(funcionario);
             // Altera os registro da jtable
-            List lista = funcionarioDAO.listAll();
-            controleFuncionario.setList(lista);
+            
         };
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed

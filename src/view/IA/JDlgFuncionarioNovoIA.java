@@ -2,6 +2,8 @@ package view.IA;
 import bean.FunionarioMr;
 import bean.UsuarioMr;
 import dao.FuncionarioDAO;
+import dao.UsuariosDAO;
+import java.util.List;
 import view.tools.Util;
 
 /*
@@ -15,7 +17,7 @@ import view.tools.Util;
  * @author u13766540670
  */
 public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
-FuncionarioDAO funcionarioDAO;
+
     /**
      * Creates new form JDlgusuarioNovoIAa
      */
@@ -23,15 +25,23 @@ FuncionarioDAO funcionarioDAO;
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+            setLocationRelativeTo(null);
+            UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = usuariosDAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+           jCboFk.addItem((UsuarioMr) lista.get(i)); }
     }
      public FunionarioMr viewBean(){
                  FunionarioMr funcionario = new FunionarioMr();    
+                 
         funcionario.setIdFunionarioMr(Util.strInt(JTxtCodigo.getText()));
+        
          funcionario.setEmailMr(jTxtEmail.getText());
         funcionario.setNomeMr(JTxtNome.getText());
        funcionario.setNumeroTelMr(jTxtNumeroTel.getText());
-        funcionario.setSexoMr(jTxtSexo.getText());
-      
+        funcionario.setSexoMr( jCBoSexo.getSelectedIndex());
+        
+     funcionario.setUsuarioMr((UsuarioMr) jCboFk.getSelectedItem());
      
 //        
         return funcionario;
@@ -57,10 +67,10 @@ FuncionarioDAO funcionarioDAO;
         jLabel4 = new javax.swing.JLabel();
         jTxtNumeroTel = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTxtSexo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jCboFk = new javax.swing.JComboBox<UsuarioMr>();
         jLabel3 = new javax.swing.JLabel();
+        jCBoSexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,6 +95,7 @@ FuncionarioDAO funcionarioDAO;
         flowLayout1.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout1);
 
+        jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +104,7 @@ FuncionarioDAO funcionarioDAO;
         });
         jPanel1.add(jBtnOk);
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,12 +129,6 @@ FuncionarioDAO funcionarioDAO;
 
         jLabel7.setText("Numero de telefone");
 
-        jTxtSexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtSexoActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Sexo");
 
         jCboFk.addActionListener(new java.awt.event.ActionListener() {
@@ -133,17 +139,19 @@ FuncionarioDAO funcionarioDAO;
 
         jLabel3.setText("Usuario");
 
+        jCBoSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Homem", "Mulher", "Prefiro não dizer", "pastel" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JTxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(JTxtNome)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jTxtEmail)
@@ -151,12 +159,11 @@ FuncionarioDAO funcionarioDAO;
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jTxtNumeroTel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(11, 11, 11))
-                                    .addComponent(jTxtSexo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jCBoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(11, 11, 11)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -187,19 +194,20 @@ FuncionarioDAO funcionarioDAO;
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtNumeroTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(20, 20, 20)
+                        .addComponent(jCBoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -221,8 +229,12 @@ FuncionarioDAO funcionarioDAO;
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
          FunionarioMr funcionario = viewBean();
+         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         funcionarioDAO.insert(funcionario);
-        setVisible(false);
+        
+        
+   
+        
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -233,10 +245,6 @@ FuncionarioDAO funcionarioDAO;
     private void jTxtNumeroTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNumeroTelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtNumeroTelActionPerformed
-
-    private void jTxtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtSexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtSexoActionPerformed
 
     private void jCboFkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboFkActionPerformed
         // TODO add your handling code here:
@@ -304,6 +312,7 @@ FuncionarioDAO funcionarioDAO;
     private javax.swing.JTextField JTxtNome;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnOk;
+    private javax.swing.JComboBox<String> jCBoSexo;
     private javax.swing.JComboBox<UsuarioMr> jCboFk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -314,6 +323,5 @@ FuncionarioDAO funcionarioDAO;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTxtEmail;
     private javax.swing.JTextField jTxtNumeroTel;
-    private javax.swing.JTextField jTxtSexo;
     // End of variables declaration//GEN-END:variables
 }

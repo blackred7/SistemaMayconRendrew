@@ -82,7 +82,15 @@ public class Util {
         return null;
     }
       public static String dataStr(String data) {
-          SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
         return formato.format(data);
+    }
+      
+      public static boolean incl(boolean incluir) {
+          
+          
+        return  incluir;
+        
     }
 }

@@ -4,32 +4,35 @@
  * and open the template in the editor.
  */
 package view.controle;
-
-import bean.AnimaisMr;
 import javax.swing.table.AbstractTableModel;
+import bean.VendasMr;
 import java.util.List;
+
 /**
  *
  * @author u13766540670
  */
-public class ControleAnimal extends AbstractTableModel {
-
-private List lista;
+public class vendasControle extends AbstractTableModel  {
+    private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+this.fireTableDataChanged();
 }
 public  void setlist(List lista){
 this.lista = lista;
 }
 
-public AnimaisMr getbean(int linha){
-return (AnimaisMr) lista.get(linha);
+public VendasMr getbean(int linha){
+return (VendasMr) lista.get(linha);
 }
     @Override
     public int getRowCount() {
         return lista.size();
     }
+
+    
+
 
     @Override
     public int getColumnCount() {
@@ -38,18 +41,20 @@ return (AnimaisMr) lista.get(linha);
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        AnimaisMr ani = (AnimaisMr) lista.get(rowIndex);
+         VendasMr venda = (VendasMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return ani.getIdAnimaisMr();
+             return venda.getIdVendasMr();
         }
         if (columnIndex == 1) {
-             return ani.getNomeMr();
+             return venda.getDataMr();
         }
         if (columnIndex == 2) {
-             return ani.getPrecoMr();
+              return venda.getValorTotalMr();
         }
         if (columnIndex == 3) {
-             return ani.getQuantidadeMr();
+            
+        
+              return venda.getQuantidadeTotalMr();
         
         }
        return null;
@@ -60,15 +65,16 @@ return (AnimaisMr) lista.get(linha);
              return "ID";
         }
         if (columnIndex == 1) {
-             return "Nome";
+             return "Data";
         }
         if (columnIndex == 2) {
-             return "preço";
+             return "Valor total";
         }
         if (columnIndex == 3) {
-             return "quantidade";
+             return "Quantidade total";
         }
        
     return null;
     }
 }
+

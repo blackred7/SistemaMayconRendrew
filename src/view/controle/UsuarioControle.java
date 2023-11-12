@@ -17,6 +17,7 @@ private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+this.fireTableDataChanged();
 }
 public  void setlist(List lista){
 this.lista = lista;
@@ -51,7 +52,13 @@ return (UsuarioMr) lista.get(linha);
               return usu.getApelidoMr();
         }
         if (columnIndex == 3) {
-              return usu.getCpfMr();
+            
+            if (usu.getAtivoMr().equals("S")) {
+              return  "Ativo";
+            }else if(usu.getAtivoMr().equals("N")){
+             return  "Inativo";
+            }
+              return "Não encontrado";
         
         }
        return null;
@@ -68,7 +75,7 @@ return (UsuarioMr) lista.get(linha);
              return "Apelido";
         }
         if (columnIndex == 3) {
-             return "CPF";
+             return "Ativo";
         }
        
     return null;

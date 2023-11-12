@@ -19,6 +19,7 @@ private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+this.fireTableDataChanged();
 }
 public  void setlist(List lista){
 this.lista = lista;
@@ -31,7 +32,7 @@ return (ClienteMr) lista.get(linha);
 
     @Override
     public int getRowCount() {
-        return 4;
+         return lista.size();
     }
 
     @Override
@@ -41,7 +42,7 @@ return (ClienteMr) lista.get(linha);
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       ClienteMr cliente = (ClienteMr) lista.get(rowIndex); cliente = (ClienteMr) lista.get(rowIndex);
+     ClienteMr cliente = (ClienteMr) lista.get(rowIndex);
       if (columnIndex == 0) {
              return cliente.getIdClienteMr();
         }
@@ -52,7 +53,7 @@ return (ClienteMr) lista.get(linha);
              return cliente.getEmailMr();
         }
         if (columnIndex == 3) {
-             return cliente.getRgMr();
+             return cliente.getCepMr();
         
         }
        return null;
@@ -69,7 +70,7 @@ return (ClienteMr) lista.get(linha);
              return "Email";
         }
         if (columnIndex == 3) {
-             return "Rg";
+             return "cep";
         }
        
     return null;

@@ -5,16 +5,16 @@
  */
 package view.controle;
 
-import bean.AnimaisMr;
-import javax.swing.table.AbstractTableModel;
+import bean.UsuarioMr;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
+
 /**
  *
  * @author u13766540670
  */
-public class ControleAnimal extends AbstractTableModel {
-
-private List lista;
+public class ControleConsutaUsu extends AbstractTableModel{
+    private List lista;
 
 public void setList(List lista){
 this.lista=lista;
@@ -23,13 +23,16 @@ public  void setlist(List lista){
 this.lista = lista;
 }
 
-public AnimaisMr getbean(int linha){
-return (AnimaisMr) lista.get(linha);
+public UsuarioMr getbean(int linha){
+return (UsuarioMr) lista.get(linha);
 }
     @Override
     public int getRowCount() {
         return lista.size();
     }
+
+    
+
 
     @Override
     public int getColumnCount() {
@@ -38,18 +41,18 @@ return (AnimaisMr) lista.get(linha);
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        AnimaisMr ani = (AnimaisMr) lista.get(rowIndex);
+         UsuarioMr usu = (UsuarioMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return ani.getIdAnimaisMr();
+             return usu.getIdUsuarioMr();
         }
         if (columnIndex == 1) {
-             return ani.getNomeMr();
+             return usu.getNomeMr();
         }
         if (columnIndex == 2) {
-             return ani.getPrecoMr();
+              return usu.getApelidoMr();
         }
         if (columnIndex == 3) {
-             return ani.getQuantidadeMr();
+              return usu.getCpfMr();
         
         }
        return null;
@@ -63,10 +66,10 @@ return (AnimaisMr) lista.get(linha);
              return "Nome";
         }
         if (columnIndex == 2) {
-             return "preço";
+             return "Apelido";
         }
         if (columnIndex == 3) {
-             return "quantidade";
+             return "CPF";
         }
        
     return null;
