@@ -6,12 +6,13 @@
 package view.pesquisar;
 
 import bean.VendasMr;
+import dao.VendasAnimaisDAO;
 import dao.VendasDAO;
 import java.util.List;
 import view.controle.vendasControle;
 import view.JDLgVendas;
 import view.JDlgUsuarios;
-import view.controle.UsuarioControle;
+import view.controle.AniVendasControle;
 /**
  *
  * @author u13766540670
@@ -115,7 +116,18 @@ private  JDLgVendas jDLgVendas;
         VendasMr vendas = controle.getbean(rowsel);
         jDLgVendas.beanviaw(vendas);
 
+       AniVendasControle  controleAnimal = new  AniVendasControle();
+         
+ VendasAnimaisDAO vAniDAO = new VendasAnimaisDAO();
+        List lista = vAniDAO.listAll();
+        
+       controleAnimal.setList(lista);
+        jDLgVendas.getjTable1().setModel(controleAnimal);   
+        
         setVisible(false);
+        
+        
+        
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
