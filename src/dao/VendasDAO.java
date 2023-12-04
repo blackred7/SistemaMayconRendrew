@@ -64,7 +64,7 @@ session.clear();
     public Object list(int id) {
        session.beginTransaction();
        Criteria criteria = session.createCriteria(VendasMr.class);
-       criteria.add(Restrictions.eq("idUsuario_MR", id));
+       criteria.add(Restrictions.eq("idVendasMr", id));
         List lista = criteria.list();
         session.getTransaction().commit();
     return lista.get(0);
@@ -110,8 +110,26 @@ session.clear();
    
     
     }   
+        public Object busca(int quant){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasMr.class);   
+        criteria.add(Restrictions.like("idVendasMr", quant));      
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        
+            if (!lista.isEmpty() ) {
+                return  lista.get(0);
+            }
+    return null;
+        
+    
+   
+    
+    }   
        
     public static void main(String[] args) {
-        System.out.println("dao.VendasDAO.main()");
+        VendasDAO vdao = new VendasDAO();
+        Object con = vdao.busca(1);
+        System.out.println(con);
     }
 }

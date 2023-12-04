@@ -8,6 +8,7 @@ package dao;
 
 import teste.testeJDBC;
 import bean.VendasAnimaisMr;
+import bean.VendasMr;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 
@@ -63,7 +65,7 @@ session.clear();
     public Object list(int id) {
        session.beginTransaction();
        Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
-       criteria.add(Restrictions.eq("idUsuario_MR", id));
+       criteria.add(Restrictions.eq("idVendasAnimaisMr", id));
         List lista = criteria.list();
         session.getTransaction().commit();
     return lista.get(0);
@@ -78,6 +80,70 @@ session.clear();
     return lista;
      
     }
+    public Object sumV(VendasMr fk){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
+        criteria.add(Restrictions.eq("vendasMr", fk )); 
+        criteria.setProjection(Projections.sum("valorUnitarioMr"));
+          List lista = criteria.list();
+         
+       
+        session.getTransaction().commit();
+    return  lista.get(0);
+    }  
+    public Object sumQ(VendasMr fk){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
+        criteria.add(Restrictions.eq("vendasMr", fk )); 
+        criteria.setProjection(Projections.sum("quantidadeUnitariaMr"));
+          List lista = criteria.list();
+         
+       
+        session.getTransaction().commit();
+    return  lista.get(0);
+    }  
+    public String del(VendasMr fk){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
+          criteria.add(Restrictions.eq("vendasMr", fk));
+          List lista = criteria.list();
+         for (int i = 0; i < lista.size(); i++) {
+           Object object = lista.get(i);
+             session.delete(object);
+       
+        }
+       
+        session.getTransaction().commit();
+    return "foi";
     
+    }  
+    public Object listfk(VendasMr fk){
+        session.beginTransaction();
+       Criteria criteria = session.createCriteria(VendasAnimaisMr.class);
+        criteria.add(Restrictions.eq("vendasMr", fk));
+        criteria.setProjection(Projections.count("vendasMr"));
+    
+          List lista = criteria.list();
+         
+       
+        session.getTransaction().commit();
+       Object ver = 0;
+    
+        if (fk == null || lista.get(0) == ver ) {
+            return  null;
+        }
+        
+    return  lista.get(0);
+    }  
+    
+    public static void main(String[] args) {
+      VendasAnimaisDAO vadao = new VendasAnimaisDAO();
+      VendasDAO vadao2 = new VendasDAO();
+      VendasMr vendasMr =new VendasMr();
+     Object conr  = vadao2.busca(2222);
+    
+    
+        System.out.println( vadao.del((VendasMr) conr));
+    }
   
 }
