@@ -75,6 +75,7 @@ public class JFrmLogim extends javax.swing.JFrame {
 
         jBtnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok_1.png"))); // NOI18N
         jBtnEntrar.setText("Entrar");
+        jBtnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEntrarActionPerformed(evt);
@@ -83,6 +84,7 @@ public class JFrmLogim extends javax.swing.JFrame {
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCancelarActionPerformed(evt);

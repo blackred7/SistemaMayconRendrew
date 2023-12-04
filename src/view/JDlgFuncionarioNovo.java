@@ -18,7 +18,7 @@ import view.tools.Util;
  */
 public class JDlgFuncionarioNovo extends javax.swing.JDialog {
 
- ControleFuncionario controleFuncionario;
+ public ControleFuncionario controleFuncionario;
  JDlgFuncionarioNovoIA jDlgFuncionarioNovoIA;
  FuncionarioDAO funcionarioDAO;
  FunionarioMr funcionario;
@@ -32,22 +32,24 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Funcionarios");
- jDlgFuncionarioNovoIA = new JDlgFuncionarioNovoIA(null, true);
+
           controleFuncionario = new  ControleFuncionario();
-         jDlgFuncionarioNovoIA = new JDlgFuncionarioNovoIA(null, true);
+         
         funcionarioDAO = new FuncionarioDAO();
         List lista = funcionarioDAO.listAll();
         
-      carregar();
+      
+ controleFuncionario.setList(lista);
+        jTable1.setModel(controleFuncionario);
         
     }
     
    
-public void carregar(){
-     List lista = funcionarioDAO.listAll();
- controleFuncionario.setList(lista);
-        jTable1.setModel(controleFuncionario);
-}
+
+public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    }
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,12 +79,14 @@ public void carregar(){
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
+        jBtnIncluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIncluirActionPerformed(evt);
@@ -92,6 +96,7 @@ public void carregar(){
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
+        jBtnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarActionPerformed(evt);
@@ -101,6 +106,7 @@ public void carregar(){
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExcluirActionPerformed(evt);
@@ -127,29 +133,46 @@ public void carregar(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        jDlgFuncionarioNovoIA.setVisible(true);
-        jDlgFuncionarioNovoIA.setTitle("incluir");
+            JDlgFuncionarioNovoIA jDlgAnimaisNovoIA = new JDlgFuncionarioNovoIA(null, true);
+        jDlgAnimaisNovoIA.setTitle("Incluir");
+       jDlgAnimaisNovoIA.setTelaAnterior(this);
+        jDlgAnimaisNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        jDlgFuncionarioNovoIA.setVisible(true);
-       jDlgFuncionarioNovoIA.setTitle("Alterar");
+         if( Util.perguntar("deseja alterar?", "Pergunta")== JOptionPane.YES_OPTION){
+        JDlgFuncionarioNovoIA dlgFuncionarioNovoIA = new JDlgFuncionarioNovoIA(null, true);
+        dlgFuncionarioNovoIA.setTitle("Alteração de produtos");
+        dlgFuncionarioNovoIA.setTelaAnterior(this);
+        int linSel = jTable1.getSelectedRow();
+        FunionarioMr fun = (FunionarioMr) controleFuncionario.getbean(linSel);
+        dlgFuncionarioNovoIA.beanviaw(fun);
+        dlgFuncionarioNovoIA.setVisible(true);
+         }else{Util.msg("Alteração cancelada");}
         
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        // TODO add your handling code here:
+     if( Util.perguntar("deseja escluir?", "Pergunta")== JOptionPane.YES_OPTION){
+             int rowsel = jTable1.getSelectedRow();
        
-        if( Util.perguntar("deseja excluir?", "Pergunta")== JOptionPane.YES_OPTION){
-       
-         int sel = jTable1.getSelectedRow();
-            funcionario = controleFuncionario.getbean(sel);
-            funcionarioDAO.delete(funcionario);
-            // Altera os registro da jtable
-            
-        };
+       funcionario  = controleFuncionario.getbean(rowsel);       
+         funcionarioDAO = new FuncionarioDAO();
+        funcionarioDAO.delete(funcionario);
+        
+        
+         funcionarioDAO = new FuncionarioDAO();
+        List lista = funcionarioDAO.listAll();       
+       controleFuncionario.setList(lista);
+        jTable1.setModel(controleFuncionario);
+        
+       Util.msg("Exclusão efetuada");   
+      
+        } else{Util.msg("Exclusão cancelada"); }
+         
+         
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 

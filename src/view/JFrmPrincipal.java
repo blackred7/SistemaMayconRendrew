@@ -7,11 +7,11 @@ package view;
 import bean.UsuarioMr;
 import dao.UsuariosDAO;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
-import query.JDLgConsuntasFuncionarios;
-import query.JDLgConsuntasVendas;
-import query.JDLgConsutasAnimal;
-import query.JDLgConsutasClientes;
-import query.JDLgConsutasUsuario;
+import query.JDLgConsultasFuncionarios;
+import query.JDLgConsultasVendas;
+import query.JDLgConsultasAnimal;
+import query.JDLgConsultasClientes;
+import query.JDLgConsultasUsuario;
 import view.tools.Util;
 /**
  *
@@ -73,9 +73,12 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jMmuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
         jMmuUsuario.setText("Usuarios");
+        jMmuUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMmuUsuario.setDisabledIcon(null);
         jMmuUsuario.setFocusable(false);
         jMmuUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMmuUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -94,6 +97,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMmuAnimais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-animal-48.png"))); // NOI18N
         jMmuAnimais.setText("Animais");
         jMmuAnimais.setToolTipText("");
+        jMmuAnimais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMmuAnimais.setDisabledIcon(null);
         jMmuAnimais.setFocusable(false);
         jMmuAnimais.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMmuAnimais.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,6 +111,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMmuVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stats_pie_chart.png"))); // NOI18N
         jMmuVenda.setText("Vendas");
+        jMmuVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMmuVenda.setDisabledIcon(null);
         jMmuVenda.setFocusable(false);
         jMmuVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMmuVenda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -118,6 +125,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMmuConsutasUsua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/consulta/icons8-usuário-homem-com-círculo-64.png"))); // NOI18N
         jMmuConsutasUsua.setText("Consutar Usuario");
+        jMmuConsutasUsua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMmuConsutasUsua.setDisabledIcon(null);
         jMmuConsutasUsua.setFocusable(false);
         jMmuConsutasUsua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMmuConsutasUsua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -219,6 +228,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMmuConsutaUsu.setMnemonic('m');
         jMmuConsutaUsu.setText("Consutas");
+        jMmuConsutaUsu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMnuConsutaUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMnuConsutaUsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/consulta/icons8-usuário-homem-com-círculo-64.png"))); // NOI18N
@@ -368,28 +378,28 @@ JDlgAnimaisNovo JDlgAnimais = new JDlgAnimaisNovo(this, true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
     private void jMnuConsutaUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsutaUsuActionPerformed
-   query.JDLgConsutasUsuario consutas = new JDLgConsutasUsuario(this, true);
+   query.JDLgConsultasUsuario consutas = new JDLgConsultasUsuario(this, true);
                 consutas.setVisible(true);    }//GEN-LAST:event_jMnuConsutaUsuActionPerformed
 
     private void jMnuConsutaFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsutaFunActionPerformed
-        query.JDLgConsuntasFuncionarios consutas = new JDLgConsuntasFuncionarios(this, true);
+        query.JDLgConsultasFuncionarios consutas = new JDLgConsultasFuncionarios(this, true);
                 consutas.setVisible(true);
     }//GEN-LAST:event_jMnuConsutaFunActionPerformed
 
     private void jMnuConsutaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsutaCliActionPerformed
- query.JDLgConsutasClientes consutas = new JDLgConsutasClientes(this, true);
+ query.JDLgConsultasClientes consutas = new JDLgConsultasClientes(this, true);
                 consutas.setVisible(true);    }//GEN-LAST:event_jMnuConsutaCliActionPerformed
 
     private void jMnuConsutaAniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsutaAniActionPerformed
-query.JDLgConsutasAnimal consutas = new JDLgConsutasAnimal(this, true);
+query.JDLgConsultasAnimal consutas = new JDLgConsultasAnimal(this, true);
                 consutas.setVisible(true);    }//GEN-LAST:event_jMnuConsutaAniActionPerformed
 
     private void jMnuConsutaVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsutaVenActionPerformed
-query.JDLgConsuntasVendas consutas = new JDLgConsuntasVendas(this, true);
+query.JDLgConsultasVendas consutas = new JDLgConsultasVendas(this, true);
                 consutas.setVisible(true);    }//GEN-LAST:event_jMnuConsutaVenActionPerformed
 
     private void jMmuConsutasUsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMmuConsutasUsuaActionPerformed
-  query.JDLgConsutasUsuario consutas = new JDLgConsutasUsuario(this, true);
+  query.JDLgConsultasUsuario consutas = new JDLgConsultasUsuario(this, true);
                 consutas.setVisible(true);    }//GEN-LAST:event_jMmuConsutasUsuaActionPerformed
 
     /**

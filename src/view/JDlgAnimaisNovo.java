@@ -13,13 +13,15 @@ import bean.AnimaisMr;
 import bean.ClienteMr;
 import bean.UsuarioMr;
 import java.util.List;
+import javax.swing.JComponent;
+import javax.swing.JTable;
 /**
  *
  * @author u13766540670
  */
-public class JDlgAnimaisNovo extends javax.swing.JDialog {
- ControleAnimal controleAnimal;
- JDlgAnimaisNovoIA jDlgAnimaisNovoIA;
+public final class JDlgAnimaisNovo extends javax.swing.JDialog {
+public ControleAnimal controleAnimal;
+ 
  AnimaisDAO animaisDAO;
  AnimaisMr ani;
  boolean incl;
@@ -31,18 +33,20 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("animais");
-        jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
+        
           controleAnimal = new  ControleAnimal();
-         jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
-        animaisDAO = new AnimaisDAO();
+         
+  animaisDAO = new AnimaisDAO();
         List lista = animaisDAO.listAll();
         
        controleAnimal.setList(lista);
-        jTable1.setModel(controleAnimal);
-    }
-    
+        jTable1.setModel(controleAnimal);    }
    
-
+   
+      public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    }
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,12 +76,14 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
+        jBtnIncluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIncluirActionPerformed(evt);
@@ -87,6 +93,7 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
+        jBtnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnAlterarActionPerformed(evt);
@@ -96,6 +103,7 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir_1.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExcluirActionPerformed(evt);
@@ -122,21 +130,29 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+       JDlgAnimaisNovoIA jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
+        jDlgAnimaisNovoIA.setTitle("Incluir");
+       jDlgAnimaisNovoIA.setTelaAnterior(this);
         jDlgAnimaisNovoIA.setVisible(true);
-        jDlgAnimaisNovoIA.setTitle("incluir");
-        List lista = animaisDAO.listAll();
         
-       controleAnimal.setList(lista);
+
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        if( Util.perguntar("deseja alterar?", "Pergunta")== JOptionPane.YES_OPTION){
-         jDlgAnimaisNovoIA.setVisible(true);
-        jDlgAnimaisNovoIA.setTitle("alterar");
+        
+         if( Util.perguntar("deseja alterar?", "Pergunta")== JOptionPane.YES_OPTION){
+        JDlgAnimaisNovoIA jDlgAnimaisNovoIA = new JDlgAnimaisNovoIA(null, true);
+        jDlgAnimaisNovoIA.setTitle("Alteração de produtos");
+        jDlgAnimaisNovoIA.setTelaAnterior(this);
+        int linSel = jTable1.getSelectedRow();
+        AnimaisMr ani = (AnimaisMr) controleAnimal.getbean(linSel);
+        jDlgAnimaisNovoIA.beanviaw(ani);
+        jDlgAnimaisNovoIA.setVisible(true);
+         }else{Util.msg("Alteração cancelada");}
    
       
-        }
+        
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -148,13 +164,17 @@ public class JDlgAnimaisNovo extends javax.swing.JDialog {
        AnimaisMr animais = controleAnimal.getbean(rowsel);       
         AnimaisDAO aniDAO = new AnimaisDAO();
         aniDAO.delete(animais);
-         List lista = animaisDAO.listAll();       
+        
+        
+         animaisDAO = new AnimaisDAO();
+        List lista = animaisDAO.listAll();       
        controleAnimal.setList(lista);
+        jTable1.setModel(controleAnimal);
+        
        Util.msg("Exclusão efetuada");   
-       
+      
         } else{Util.msg("Exclusão cancelada"); }
-         List lista = animaisDAO.listAll();       
-       controleAnimal.setList(lista);
+         
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**
