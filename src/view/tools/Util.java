@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -49,6 +50,8 @@ public class Util {
            
             
         }
+   
+     
     
     public static void msg( String mensagem) {
          JOptionPane.showMessageDialog(null, mensagem);
@@ -69,7 +72,7 @@ public class Util {
      public static double strDouble(String cad) {
         return Double.valueOf(cad);
     }
-      public static String doubleStr(String num) {
+      public static String doubleStr(double num) {
         return String.valueOf(num);
     }
       public static java.util.Date strData(String cad) {
@@ -81,7 +84,7 @@ public class Util {
         }
         return null;
     }
-      public static String dataStr(String data) {
+      public static String dataStr(Date data) {
          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         return formato.format(data);
