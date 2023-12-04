@@ -3,22 +3,25 @@ package view.IA;
 import bean.AnimaisMr;
 import bean.UsuarioMr;
 import dao.AnimaisDAO;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import view.controle.ControleAnimal;
 import view.tools.Util;
-
+import view.JDlgAnimaisNovo;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author u13766540670
  */
 public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
- ControleAnimal controleAnimal;
+    
+   
+JDlgAnimaisNovo animaisNovo;
+
     /**
      * Creates new form JDlgusuarioNovoIAa
      */
@@ -26,23 +29,47 @@ public class JDlgAnimaisNovoIA extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-    }
-public AnimaisMr viewBean() {
-        AnimaisMr ani = new AnimaisMr();    
         
+    }
+
+    
+        public void setTelaAnterior(JDlgAnimaisNovo animaisNovo) {
+        this.animaisNovo = animaisNovo;
+    }
+    
+    public AnimaisMr viewBean() {
+        AnimaisMr ani = new AnimaisMr();
+
         ani.setIdAnimaisMr(Util.strInt(JTxtCodigo.getText()));
-         ani.setQuantidadeMr(Util.strInt(jTxtQuant.getText()));
+        ani.setQuantidadeMr(Util.strInt(jTxtQuant.getText()));
         ani.setNomeMr(JTxtNome.getText());
-       ani.setDescricaoMr(JTxtDescricao.getText());
-       ani.setEspecieMr(jTxtEspecie.getText());
-       ani.setOrigemMr(jTxtOrigem.getText());
-       ani.setPesoMr(jTxtPreco.getText());
-       ani.setTamanhoMr(jTxtTam.getText());
-       ani.setPrecoMr(Util.strDouble(jTxtPreco.getText()));
-      
-     
+        ani.setDescricaoMr(JTxtDescricao.getText());
+        ani.setEspecieMr(jTxtEspecie.getText());
+        ani.setOrigemMr(jTxtOrigem.getText());
+        ani.setPesoMr(jTxtPreco.getText());
+        ani.setTamanhoMr(jTxtTam.getText());
+        ani.setPrecoMr(Util.strDouble(jTxtPreco.getText()));
+
         return ani;
     }
+
+    public AnimaisMr beanviaw(AnimaisMr ani) {
+
+        JTxtCodigo.setText(Util.intStr(ani.getIdAnimaisMr()));
+        //string\/
+        JTxtNome.setText(ani.getNomeMr());
+        jTxtOrigem.setText(ani.getOrigemMr());
+        JTxtDescricao.setText(ani.getDescricaoMr());
+        jTxtEspecie.setText(ani.getEspecieMr());
+        jTxtPeso.setText(ani.getPesoMr());
+        jTxtTam.setText(ani.getTamanhoMr());
+        jTxtPreco.setText(Util.intStr((int) ani.getPrecoMr()));
+        jTxtQuant.setText(Util.intStr(ani.getQuantidadeMr()));
+
+        return ani;
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +127,7 @@ public AnimaisMr viewBean() {
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
+        jBtnOk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOkActionPerformed(evt);
@@ -109,6 +137,7 @@ public AnimaisMr viewBean() {
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCancelarActionPerformed(evt);
@@ -252,14 +281,24 @@ public AnimaisMr viewBean() {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        // TODO add your handling code here:
-         //UsuarioMr usuarios = viewBean();
-      //  usuariosDAO.insert(usuarios);
-           AnimaisMr ani = viewBean();
+        AnimaisMr ani = viewBean();
         AnimaisDAO animaisDAO = new AnimaisDAO();
-        animaisDAO.insert(ani);
-      
+    
         
+         if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+             animaisDAO.insert(ani);
+             animaisNovo.controleAnimal.addBean(ani);
+             
+        } else {    
+             animaisDAO.update(ani);
+                         animaisNovo.controleAnimal.updateBean(animaisNovo.getSelectedRowProd(), ani);
+
+        }
+        setVisible(false);
+       
+        
+        
+
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 

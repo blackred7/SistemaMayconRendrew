@@ -18,14 +18,33 @@ private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+
+this.fireTableDataChanged();
+
 }
-public  void setlist(List lista){
-this.lista = lista;
-}
+
 
 public AnimaisMr getbean(int linha){
 return (AnimaisMr) lista.get(linha);
 }
+
+public void addBean(AnimaisMr ani){
+lista.add(ani);
+this.fireTableDataChanged();
+
+} 
+public void removeBean(int index){
+lista.remove(index);
+this.fireTableDataChanged();
+
+} 
+public void updateBean(int index,AnimaisMr ani ){
+lista.set(index, ani);
+this.fireTableDataChanged();
+
+} 
+
+
     @Override
     public int getRowCount() {
         return lista.size();

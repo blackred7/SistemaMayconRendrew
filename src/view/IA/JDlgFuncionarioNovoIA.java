@@ -4,6 +4,7 @@ import bean.UsuarioMr;
 import dao.FuncionarioDAO;
 import dao.UsuariosDAO;
 import java.util.List;
+import view.JDlgFuncionarioNovo;
 import view.tools.Util;
 
 /*
@@ -18,6 +19,7 @@ import view.tools.Util;
  */
 public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
+    JDlgFuncionarioNovo funcionarioNovo;
     /**
      * Creates new form JDlgusuarioNovoIAa
      */
@@ -30,6 +32,11 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         List lista = usuariosDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
            jCboFk.addItem((UsuarioMr) lista.get(i)); }
+    }
+    
+       public void setTelaAnterior(JDlgFuncionarioNovo funcionarioNovo) {
+        this.funcionarioNovo = funcionarioNovo;
+        
     }
      public FunionarioMr viewBean(){
                  FunionarioMr funcionario = new FunionarioMr();    
@@ -47,6 +54,21 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         return funcionario;
         
      }
+     public FunionarioMr beanviaw(FunionarioMr fun) {
+
+        JTxtCodigo.setText(Util.intStr(fun.getIdFunionarioMr()));
+        //string\/
+        JTxtNome.setText(fun.getNomeMr());
+        jTxtEmail.setText(fun.getEmailMr());
+        jTxtNumeroTel.setText(fun.getNumeroTelMr());
+        jCBoSexo.setSelectedIndex(fun.getSexoMr());
+                   jCboFk.setSelectedItem(fun.getUsuarioMr());
+
+        
+
+        return fun;
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +119,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
+        jBtnOk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOkActionPerformed(evt);
@@ -106,6 +129,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnCancelarActionPerformed(evt);
@@ -140,6 +164,7 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         jLabel3.setText("Usuario");
 
         jCBoSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Homem", "Mulher", "Prefiro não dizer", "pastel" }));
+        jCBoSexo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,14 +225,12 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtNumeroTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTxtNumeroTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jCBoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jCBoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -228,13 +251,24 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-         FunionarioMr funcionario = viewBean();
-         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.insert(funcionario);
+         FunionarioMr fun = viewBean();
+        FuncionarioDAO animaisDAO = new FuncionarioDAO();
+    
+        
+         if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+             animaisDAO.insert(fun);
+             funcionarioNovo.controleFuncionario.addBean(fun);
+             
+        } else {    
+             animaisDAO.update(fun);
+                         funcionarioNovo.controleFuncionario.updateBean(funcionarioNovo.getSelectedRowProd(), fun);
+
+        }
+        setVisible(false);
+       
         
         
-   
-        
+
         this.dispose();
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -275,6 +309,22 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDlgFuncionarioNovoIA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

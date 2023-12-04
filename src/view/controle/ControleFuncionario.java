@@ -17,14 +17,30 @@ private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+this.fireTableDataChanged();
 }
-public  void setlist(List lista){
-this.lista = lista;
-}
+
 
 public FunionarioMr getbean(int linha){
 return (FunionarioMr) lista.get(linha);
 }
+
+public void addBean(FunionarioMr fun){
+lista.add(fun);
+this.fireTableDataChanged();
+
+} 
+public void removeBean(int index){
+lista.remove(index);
+this.fireTableDataChanged();
+
+} 
+public void updateBean(int index,FunionarioMr fun ){
+lista.set(index, fun);
+this.fireTableDataChanged();
+
+} 
+
     @Override
     public int getRowCount() {
         return lista.size();

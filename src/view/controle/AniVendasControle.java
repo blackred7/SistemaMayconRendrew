@@ -18,14 +18,28 @@ private List lista;
 
 public void setList(List lista){
 this.lista=lista;
+this.fireTableDataChanged();
 }
-public  void setlist(List lista){
-this.lista = lista;
-}
+
 
 public VendasAnimaisMr getbean(int linha){
 return (VendasAnimaisMr) lista.get(linha);
 }
+public void addBean(VendasAnimaisMr veAn){
+lista.add(veAn);
+this.fireTableDataChanged();
+
+} 
+public void removeBean(int index){
+lista.remove(index);
+this.fireTableDataChanged();
+
+} 
+public void updateBean(int index,VendasAnimaisMr veAn ){
+lista.set(index, veAn);
+this.fireTableDataChanged();
+
+} 
 
     @Override
     public int getRowCount() {
@@ -41,7 +55,7 @@ return (VendasAnimaisMr) lista.get(linha);
     public Object getValueAt(int rowIndex, int columnIndex) {
         VendasAnimaisMr vendas = (VendasAnimaisMr) lista.get(rowIndex);
       if (columnIndex == 0) {
-             return vendas.getId();
+             return vendas.getIdVendasAnimaisMr();
         }
         if (columnIndex == 1) {
              return vendas.getAnimaisMr();
