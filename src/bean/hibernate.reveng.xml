@@ -41,10 +41,10 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db_maycon_borges"/>
-  <table-filter match-name="cliente_mr"/>
   <table-filter match-name="funionario_mr"/>
-  <table-filter match-name="vendas_animais_mr"/>
-  <table-filter match-name="usuario_mr"/>
-  <table-filter match-name="animais_mr"/>
   <table-filter match-name="vendas_mr"/>
+  <table-filter match-name="vendas_animais_mr"/>
+  <table-filter match-name="animais_mr"/>
+  <table-filter match-name="usuario_mr"/>
+  <table-filter match-name="cliente_mr"/>
 </hibernate-reverse-engineering>

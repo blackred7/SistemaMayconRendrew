@@ -1,5 +1,5 @@
 package bean;
-// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+// Generated 01/12/2023 14:49:00 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -32,7 +32,7 @@ public class UsuarioMr  implements java.io.Serializable {
      private String cpfMr;
      private int nivelMr;
      private String ativoMr;
-
+  
 
     public UsuarioMr() {
     }
@@ -48,7 +48,7 @@ public class UsuarioMr  implements java.io.Serializable {
         this.nivelMr = nivelMr;
         this.ativoMr = ativoMr;
     }
-    public UsuarioMr( String nomeMr, Date nascMr, String senhaMr, String apelidoMr, String cpfMr, int nivelMr, String ativoMr, int idUsuarioMr) {
+    public UsuarioMr(int idUsuarioMr, String nomeMr, Date nascMr, String senhaMr, String apelidoMr, String cpfMr, String ativoMr, int nivelMr) {
        this.idUsuarioMr = idUsuarioMr;
        this.nomeMr = nomeMr;
        this.nascMr = nascMr;
@@ -143,14 +143,21 @@ public class UsuarioMr  implements java.io.Serializable {
     }
 
 
-@Override
-     public  String toString(){
-    
-         return this.getNomeMr();
 
+  @Override
+     public String toString() {
+return this.nomeMr;
 }
-
-
+@Override
+public boolean equals(Object object) {
+if (object instanceof UsuarioMr) {
+UsuarioMr atu = (UsuarioMr) object;
+if (this.getIdUsuarioMr()== atu.getIdUsuarioMr()) {
+return true;
+}
+}
+return false;
+}
 
 }
 

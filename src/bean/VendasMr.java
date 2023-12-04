@@ -1,5 +1,5 @@
 package bean;
-// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+// Generated 01/12/2023 14:49:00 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,6 +33,7 @@ public class VendasMr  implements java.io.Serializable {
      private double valorTotalMr;
      private Date dataMr;
 
+
     public VendasMr() {
     }
 
@@ -45,13 +46,14 @@ public class VendasMr  implements java.io.Serializable {
         this.valorTotalMr = valorTotalMr;
         this.dataMr = dataMr;
     }
-    public VendasMr(ClienteMr clienteMr, FunionarioMr funionarioMr, int quantidadeTotalMr, double valorTotalMr, Date dataMr, int idVendasMr ) {
+    public VendasMr(int idVendasMr, ClienteMr clienteMr, FunionarioMr funionarioMr, int quantidadeTotalMr, Date dataMr, double valorTotalMr) {
        this.idVendasMr = idVendasMr;
        this.clienteMr = clienteMr;
        this.funionarioMr = funionarioMr;
        this.quantidadeTotalMr = quantidadeTotalMr;
        this.valorTotalMr = valorTotalMr;
        this.dataMr = dataMr;
+
     }
    
      @Id 
@@ -117,14 +119,21 @@ public class VendasMr  implements java.io.Serializable {
     }
 
 
-@Override
-     public  String toString(){
-    
-         return Util.intStr(this.idVendasMr);
 
+  @Override
+     public String toString() {
+return Util.intStr(this.idVendasMr);
 }
-
-
+@Override
+public boolean equals(Object object) {
+if (object instanceof VendasMr) {
+VendasMr atu = (VendasMr) object;
+if (this.getIdVendasMr()== atu.getIdVendasMr()) {
+return true;
+}
+}
+return false;
+}
 
 }
 

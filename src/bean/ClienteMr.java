@@ -1,5 +1,5 @@
 package bean;
-// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+// Generated 01/12/2023 14:49:00 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,44 +23,39 @@ import javax.persistence.Table;
 public class ClienteMr  implements java.io.Serializable {
 
 
-     private int idClienteMr;//s
-     private UsuarioMr usuarioMr;//s
-     private String nomeMr;//s
-     private String emailMr;//s
-     private String cepMr;//s
-     private String rgMr;//s
-     private String descricaoMr;//s
+     private int idClienteMr;
+     private UsuarioMr usuarioMr;
+     private String nomeMr;
+     private String emailMr;
+     private String cepMr;
+     private String rgMr;
+     private String descricaoMr;
      private String numTelMr;
      private int sexoMr;
-     private String nomeBancoMr;//s
-     private String agenciaBancoMr;//s
-     private String numeroBancoMr;//s
-     private String ruaMr;//s
-     private String bairroMr;//s
-     private String numCasaMr;//s
-    
+     private String nomeBancoMr;
+     private String agenciaBancoMr;
+     private String numeroBancoMr;
+     private String ruaMr;
+     private String bairroMr;
+     private String numCasaMr;
 
     public ClienteMr() {
     }
 
 	
-    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr,int sexoMr,String descricaoMr,String numTelMr, String nomeMr, String emailMr, String cepMr, String rgMr, String nomeBancoMr, String agenciaBancoMr, String numeroBancoMr, String ruaMr, String bairroMr, String numCasaMr) {
+    public ClienteMr(int idClienteMr, UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, String nomeBancoMr, String agenciaBancoMr, String numeroBancoMr, String ruaMr, String bairroMr, String numCasaMr) {
         this.idClienteMr = idClienteMr;
         this.usuarioMr = usuarioMr;
         this.nomeMr = nomeMr;
         this.emailMr = emailMr;
         this.cepMr = cepMr;
         this.rgMr = rgMr;
-        this.descricaoMr = descricaoMr;
-        this.numTelMr = numTelMr;
-        this.sexoMr = sexoMr;
         this.nomeBancoMr = nomeBancoMr;
         this.agenciaBancoMr = agenciaBancoMr;
         this.numeroBancoMr = numeroBancoMr;
         this.ruaMr = ruaMr;
         this.bairroMr = bairroMr;
         this.numCasaMr = numCasaMr;
-        
     }
     public ClienteMr(int idClienteMr, UsuarioMr usuarioMr, String nomeMr, String emailMr, String cepMr, String rgMr, String descricaoMr, String numTelMr, int sexoMr, String nomeBancoMr, String agenciaBancoMr, String numeroBancoMr, String ruaMr, String bairroMr, String numCasaMr) {
        this.idClienteMr = idClienteMr;
@@ -163,7 +158,7 @@ public class ClienteMr  implements java.io.Serializable {
     }
 
     
-    @Column(name="Sexo_MR", length=1)
+    @Column(name="Sexo_MR")
     public int getSexoMr() {
         return this.sexoMr;
     }
@@ -233,14 +228,20 @@ public class ClienteMr  implements java.io.Serializable {
     }
 
 
-     @Override
-     public  String toString(){
-    
-         return this.getNomeMr();
-
+  @Override
+     public String toString() {
+return this.nomeMr;
 }
-
-
+@Override
+public boolean equals(Object object) {
+if (object instanceof ClienteMr) {
+ClienteMr atu = (ClienteMr) object;
+if (this.getIdClienteMr()== atu.getIdClienteMr()) {
+return true;
+}
+}
+return false;
+}
 
 }
 

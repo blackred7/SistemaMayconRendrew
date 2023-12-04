@@ -1,8 +1,7 @@
 package bean;
-// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+// Generated 01/12/2023 14:49:00 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -31,7 +30,6 @@ public class AnimaisMr  implements java.io.Serializable {
      private String origemMr;
      private String tamanhoMr;
      private String pesoMr;
-   
 
     public AnimaisMr() {
     }
@@ -57,7 +55,6 @@ public class AnimaisMr  implements java.io.Serializable {
        this.origemMr = origemMr;
        this.tamanhoMr = tamanhoMr;
        this.pesoMr = pesoMr;
-      
     }
    
      @Id 
@@ -152,13 +149,19 @@ public class AnimaisMr  implements java.io.Serializable {
         this.pesoMr = pesoMr;
     }
 
-
-
+    @Override
+     public String toString() {
+return this.nomeMr;
+}
 @Override
-     public  String toString(){
-    
-         return this.getNomeMr();
-
+public boolean equals(Object object) {
+if (object instanceof AnimaisMr) {
+AnimaisMr atu = (AnimaisMr) object;
+if (this.getIdAnimaisMr()== atu.getIdAnimaisMr()) {
+return true;
+}
+}
+return false;
 }
 
 

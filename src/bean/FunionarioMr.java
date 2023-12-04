@@ -1,5 +1,5 @@
 package bean;
-// Generated 09/11/2023 15:03:23 by Hibernate Tools 4.3.1
+// Generated 01/12/2023 14:49:00 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -29,7 +29,6 @@ public class FunionarioMr  implements java.io.Serializable {
      private int sexoMr;
      private String emailMr;
      private String numeroTelMr;
-   
 
     public FunionarioMr() {
     }
@@ -43,14 +42,13 @@ public class FunionarioMr  implements java.io.Serializable {
         this.emailMr = emailMr;
         this.numeroTelMr = numeroTelMr;
     }
-    public FunionarioMr( UsuarioMr usuarioMr, String nomeMr, int sexoMr, String emailMr, String numeroTelMr, int idFunionarioMr) {
+    public FunionarioMr(int idFunionarioMr, UsuarioMr usuarioMr, String nomeMr , String numeroTelMr, String emailMr , int sexoMr) {
        this.idFunionarioMr = idFunionarioMr;
        this.usuarioMr = usuarioMr;
        this.nomeMr = nomeMr;
        this.sexoMr = sexoMr;
        this.emailMr = emailMr;
        this.numeroTelMr = numeroTelMr;
-      
     }
    
      @Id 
@@ -86,7 +84,7 @@ public class FunionarioMr  implements java.io.Serializable {
     }
 
     
-    @Column(name="Sexo_MR", nullable=false, length=1)
+    @Column(name="Sexo_MR", nullable=false)
     public int getSexoMr() {
         return this.sexoMr;
     }
@@ -115,15 +113,21 @@ public class FunionarioMr  implements java.io.Serializable {
         this.numeroTelMr = numeroTelMr;
     }
 
-@Override
-     public  String toString(){
-    
-         return this.getNomeMr();
 
+  @Override
+     public String toString() {
+return this.nomeMr;
 }
-
-
-
+@Override
+public boolean equals(Object object) {
+if (object instanceof FunionarioMr) {
+FunionarioMr atu = (FunionarioMr) object;
+if (this.getIdFunionarioMr()== atu.getIdFunionarioMr()) {
+return true;
+}
+}
+return false;
+}
 
 }
 
